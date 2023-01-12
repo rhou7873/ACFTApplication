@@ -1,3 +1,3 @@
 # The ACFT Project
 
-[Check It Out] (https://acft-application.vercel.app/)
+[Check It Out](https://acft-application.vercel.app/)
