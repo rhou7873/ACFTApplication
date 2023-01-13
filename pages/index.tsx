@@ -29,6 +29,9 @@ export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <h2>Please wait as we build this world-changing product...</h2>
+    <span>
+      <img src="please_wait.gif" style={{height: "100px"}}></img>
+      <h2>Please wait as we build this world-changing product...</h2>
+    </span>
   )
 }
