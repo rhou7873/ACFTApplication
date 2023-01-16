@@ -16,6 +16,6 @@
     "jsx": "preserve",
     "noImplicitAny": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/founders.js"],
   "exclude": ["node_modules"]
 }
