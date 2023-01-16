@@ -10,7 +10,7 @@ type Props = {
 
 export async function getServerSideProps(context: any) {
   try {
-    const url = process.env.NEXT_PUBLIC_VERCEL_URL + "api/founders";
+    const url = process.env.NEXT_PUBLIC_VERCEL_URL + "/api/founders";
     let res = await fetch(url);
     let founders = await res.json();
     return {
