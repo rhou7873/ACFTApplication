@@ -1,12 +1,11 @@
-import { getNamedRouteRegex } from 'next/dist/shared/lib/router/utils/route-regex';
 import React, { useState } from 'react';
 
 function calculate_score(results : Object){
-    
+    // calculate and set score
 }
 
 
-function SoldierForm(props : any) {
+function SoldierForm(props : any) : JSX.Element{
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');

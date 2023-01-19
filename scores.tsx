@@ -1,5 +1,5 @@
 
-const deadliftScores = {
+const deadliftScores : Object = {
 17: {
     'Male': {
         340: 100,

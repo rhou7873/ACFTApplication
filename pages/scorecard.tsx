@@ -3,7 +3,7 @@ import SoldierForm from '../react_components/soldier_form'
 import NavBar from '../react_components/nav_bar'
 
 
-function Navbar(){
+function Navbar() : JSX.Element{
 return (
     <div>
         <NavBar></NavBar>

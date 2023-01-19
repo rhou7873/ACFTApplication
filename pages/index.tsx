@@ -2,7 +2,12 @@ import { InferGetServerSidePropsType } from 'next'
 import NavBar from '../react_components/nav_bar'
 import clientPromise from '../lib/mongodb';
 
-export async function getServerSideProps(context: any) {
+interface Props {
+    isConnected: boolean;
+    soldier_data: Object;
+}
+
+export async function getServerSideProps(context: any){
     try {
         const client = await clientPromise;
         const db = client.db("app-data");
@@ -23,7 +28,7 @@ export async function getServerSideProps(context: any) {
 
 export default function Home({
   isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) : JSX.Element {
   return (
     <div>
         <NavBar></NavBar>
