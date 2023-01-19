@@ -1,35 +1,41 @@
-import NavBar from '../react_components/nav_bar'
-import clientPromise from '../lib/mongodb';
+import { useEffect, useState } from 'react'
+import NavBar from '../components/navBar'
 
-interface Props {
-    isConnected: boolean;
-    soldier_data: Object;
-}
+export default function Results() {
+    let [soldierData, setSoldierData] = useState<any[]>([]);
 
-export async function getServerSideProps(context: any) {
-    try {
-        const client = await clientPromise;
-        const db = client.db("app-data");
-        const allPosts = await db.collection("soldier_data").find({}).toArray();
-        return {
-            props: {
-                soldier_data: JSON.parse(JSON.stringify(allPosts)),
-                isConnected: true
-            }
-        }
-    } catch (e) {
-      console.error(e)
-      return {
-        props: { soldier_data: null, isConnected: false },
-      }
-    }
-}
+    useEffect(() => {
+        fetch("./api/soldier", { method: "GET" })
+            .then(res => {
+                res.json().then(json => {
+                    console.log(json);
+                    setSoldierData(json);
+                })
+            });
+    }, []);
 
-export default function Results(props : Props) {
     return (
         <div>
             <NavBar></NavBar>
-            <h1 style={{fontSize : 11}}>{JSON.stringify(props.soldier_data)}</h1>
+            {soldierData.map(soldier => {
+                return (
+                    <div key={soldier._id}>
+                        <p><b>Name: {soldier.name}</b></p>
+                        <p>&emsp;Email: {soldier.email}</p>
+                        <p>&emsp;Age: {soldier.age}</p>
+                        <p>&emsp;Gender: {soldier.gender}</p>
+                        <p>&emsp;MDL: {soldier.mdl}</p>
+                        <p>&emsp;SPT: {soldier.spt}</p>
+                        <p>&emsp;HRP: {soldier.hrp}</p>
+                        <p>&emsp;SDC: {soldier.sdc}</p>
+                        <p>&emsp;PLK: {soldier.plk}</p>
+                        <p>&emsp;2MR: {soldier.run}</p>
+                        <p>&emsp;Score: {soldier.score}</p>
+                        <br />
+                        <br/>
+                    </div>
+                )
+            })}
         </div>
     )
 }

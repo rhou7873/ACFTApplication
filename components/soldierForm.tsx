@@ -6,16 +6,16 @@ function calculate_score(results : Object){
 
 
 function SoldierForm(props : any) : JSX.Element{
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
-  const [mdl, setMDL] = useState('');
-  const [spt, setSPT] = useState('');
-  const [hrp, setHRP] = useState('');
-  const [sdc, setSDC] = useState('');
-  const [plk, setPLK] = useState('');
-  const [run, setRun] = useState('');
-  const [gender, setGender] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
+  const [mdl, setMDL] = useState("");
+  const [spt, setSPT] = useState("");
+  const [hrp, setHRP] = useState("");
+  const [sdc, setSDC] = useState("");
+  const [plk, setPLK] = useState("");
+  const [run, setRun] = useState("");
+  const [gender, setGender] = useState("Male");
 
   async function handleSubmit(event: any) {
     event.preventDefault();
@@ -33,7 +33,7 @@ function SoldierForm(props : any) : JSX.Element{
         score: 0
     };
     calculate_score(results);
-    let res = await fetch("./api/testApi", {
+    let res = await fetch("./api/soldier", {
         method: "POST",
         body: JSON.stringify(results),
     });

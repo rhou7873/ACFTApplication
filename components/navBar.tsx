@@ -20,6 +20,11 @@ function Navbar(){
             Results
           </Link>
         </li>
+        <li>
+          <Link href="/aboutUs">
+            About Us
+          </Link>
+        </li>
       </ul>
     </nav>
   );

@@ -1,37 +1,36 @@
-import { InferGetServerSidePropsType } from 'next'
-import NavBar from '../react_components/nav_bar'
+import NavBar from '../components/navBar'
 import clientPromise from '../lib/mongodb';
 
 interface Props {
     isConnected: boolean;
-    soldier_data: Object;
+    soldier: Object;
 }
 
 export async function getServerSideProps(context: any){
     try {
         const client = await clientPromise;
-        const db = client.db("app-data");
-        const allPosts = await db.collection("soldier_data").find({}).toArray();
+        const db = client.db("appData");
+        const allPosts = await db.collection("soldierData").find({}).toArray();
         return {
             props: {
-                soldier_data: JSON.parse(JSON.stringify(allPosts)),
+                soldier: JSON.parse(JSON.stringify(allPosts)),
                 isConnected: true
             }
         }
     } catch (e) {
       console.error(e)
       return {
-        props: { soldier_data: null, isConnected: false },
+        props: { soldier: null, isConnected: false },
       }
     }
 }
 
-export default function Home({
-  isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) : JSX.Element {
+export default function Home(props: Props) {
   return (
     <div>
         <NavBar></NavBar>
+        <img src="army_derp.jpg"></img>
+        <h1>i am da armeh</h1>
     </div>
   )
 }

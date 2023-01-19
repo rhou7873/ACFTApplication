@@ -1,7 +1,6 @@
 import React from 'react';
-import SoldierForm from '../react_components/soldier_form'
-import NavBar from '../react_components/nav_bar'
-
+import SoldierForm from '../components/soldierForm'
+import NavBar from '../components/navBar'
 
 function Navbar() : JSX.Element{
 return (
