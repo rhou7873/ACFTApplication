@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import NavBar from '../components/navBar'
+import { useEffect, useState } from 'react';
+import NavBar from '../components/navBar';
 
 export default function Results() {
     let [soldierData, setSoldierData] = useState<any[]>([]);
