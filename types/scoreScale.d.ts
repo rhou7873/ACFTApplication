@@ -1,7 +1,7 @@
 /**
- * Encapsulates data about a soldier
+ * Encapsulates data about a scoring scale
  */
-interface Soldier {
+interface ScoreScale {
     firstName: string,
     lastName: string,
     age: number,

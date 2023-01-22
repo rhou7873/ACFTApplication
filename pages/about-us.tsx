@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/navBar";
 
-export default function aboutUs() {
+export default function AboutUs() {
     let [founders, setFounders] = useState<any[]>([]);
     
     useEffect(() => {
