@@ -1,6 +1,4 @@
-
-
-const deadliftScores : Object = {
+const deadliftScores = {
     17: {
         'Male': {
             340: 100,
@@ -336,57 +334,77 @@ const deadliftScores : Object = {
 }
 
 /**
- * Calculates maximum deadlift score
+ * Calculates and sets the given soldier's maximum deadlift score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {number} lbs - Maximum deadlift in pounds (lbs)
  */
-function mdl(soldier: Soldier, lbs: number): number {
-    return 0;
+function mdl(soldier: Soldier, lbs: number): void {
+    
 }
 
 /**
- * Calculates standing power throw score
+ * Calculates and sets the given soldier's standing power throw score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {number} meters - The number of meters recorded for the standing power throw
  */
-function spt(soldier: Soldier, meters: number): number {
-    return 0;
+function spt(soldier: Soldier, meters: number): void {
+    
 }
 
 /**
- * Calculates push-ups score
+ * Calculates and set's the given soldier's push-ups score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {number} count - The number of push-ups recorded
  */
-function hrp(soldier: Soldier, count: number): number {
-    return 0;
+function hrp(soldier: Soldier, count: number): void {
+    
 }
 
 /**
- * Calculates sprint, drag, and carry score
+ * Calculates and sets the given soldier's sprint, drag, and carry score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Overall time recorded for the sprint, drag, carry (mm:ss format)
  */
-function sdc(soldier: Soldier, time: string): number {
-    return 0;
+function sdc(soldier: Soldier, time: string): void {
+    
 }
 
 /**
- * Calculates plank score
+ * Calculates and set the given soldier's plank score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Time recorded for plank test (mm:ss format)
  */
-function plk(soldier: Soldier, time: string): number {
-    return 0;
+function plk(soldier: Soldier, time: string): void {
+    
 }
 
 /**
- * Calculates two-mile run score
+ * Calculates and sets the given soldier's two-mile run score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Time recorded for the two-mile run (mm:ss format)
  */
-function tmr(soldier: Soldier, time: string): number {
-    return 0;
+function tmr(soldier: Soldier, time: string): void {
+    
+}
+
+/**
+ * Checks if the given soldier passed the Army Combat Fitness Test.
+ * @param soldier - The soldier whose scores to check
+ * @returns True if the given soldier passed, false otherwise.
+ */
+function passed(soldier: Soldier): boolean {
+    if (!soldier.result) {
+        throw new Error(`Soldier ${soldier.firstName} ${soldier.lastName} test scores are not all populated`)
+    }
+    const result = soldier.result;
+    const props = Reflect.ownKeys(result);
+    for (const prop of props) {
+        let score = parseInt(Reflect.get(result, prop));
+        if (score < 60) {
+            return false;
+        }
+    };
+    return true;
 }
 
 export { mdl, spt, hrp, sdc, plk, tmr };
