@@ -11,7 +11,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.json(myPost);
             break;
         case "GET":
-            const allPosts = await db.collection("soldierData").find({}).toArray();
+            const allPosts = await db.collection("soldierData")
+                                        .find({})
+                                        .sort({ $natural: -1 })
+                                        .toArray();
             res.status(200).json(allPosts);
             break;
     }

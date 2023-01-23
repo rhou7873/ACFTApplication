@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { TextField, Button, MenuItem } from "@mui/material";
 
 function calculate_score(results : Object){
     // calculate and set score
 }
-
 
 function SoldierForm(props : any) : JSX.Element{
   const [name, setName] = useState("");
@@ -33,7 +33,7 @@ function SoldierForm(props : any) : JSX.Element{
         score: 0
     };
     calculate_score(results);
-    let res = await fetch("./api/soldier", {
+    let res = await fetch("./api/soldiers", {
         method: "POST",
         body: JSON.stringify(results),
     });
@@ -44,62 +44,125 @@ function SoldierForm(props : any) : JSX.Element{
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={e => setName(e.target.value)} required />
-      </label>
+    <>
+      <TextField 
+        label="Name" 
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setName(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        Email:
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-      </label>
+      <TextField 
+        label="Email" 
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setEmail(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        Age:
-        <input type="number" value={age} onChange={e => setAge(e.target.value)} required />
-      </label>
+      <TextField 
+        label="Age" 
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setAge(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        Gender:
-        <select value={gender} onChange={e => setGender(e.target.value)} required>
-            <option>Male</option>
-            <option>Female</option>
-        </select>
-      </label>
+      <TextField 
+        label="Gender"
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setGender(e.target.value)}
+        value={gender}
+        color="success"
+        select
+        required 
+      >
+        <MenuItem value="Male">Male</MenuItem>
+        <MenuItem value="Female">Female</MenuItem>
+      </TextField>
       <br />
-      <label>
-        Maximum Deadlift (MDL) in pounds:
-        <input type="number" value={mdl} onChange={e => setMDL(e.target.value)} required />
-      </label>
+      <TextField 
+        label="MDL"
+        helperText="Max Deadlift (Pounds)"
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setMDL(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        Standing Power Toss (SPT) in meters:
-        <input type="number" value={spt} onChange={e => setSPT(e.target.value)} required />
-      </label>
+      <TextField 
+        label="SPT"
+        helperText="Standing Power Toss (Meters)"
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setSPT(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        Hand Release Push-ups (HRP) as reps:
-        <input type="number" value={hrp} onChange={e => setHRP(e.target.value)} required />
-      </label>
+      <TextField 
+        label="HRP"
+        helperText="Hand Release Push-Ups (Reps)"
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setHRP(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        Sprint Drag Carry (SDC) as duration (mm:ss):
-        <input type="text" value={sdc} pattern="[0-9]{2}:[0-9]{2}" onChange={e => setSDC(e.target.value)} placeholder='00:00' required />
-      </label>
+      <TextField 
+        label="SDC"
+        helperText="Sprint, Drag, Carry (Duration)"
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setSDC(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        Plank (PLK) as duration (mm:ss):
-        <input type="text" value={plk} pattern="[0-9]{2}:[0-9]{2}" onChange={e => setPLK(e.target.value)} placeholder='00:00' required />
-      </label>
+      <TextField 
+        label="PLK"
+        helperText="Plank (Duration)"
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setPLK(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <label>
-        2 meter run as duration (mm:ss)
-        <input type="text" value={run} pattern="[0-9]{2}:[0-9]{2}" onChange={e => setRun(e.target.value)} placeholder='00:00' required />
-      </label>
+      <TextField 
+        label="2MR"
+        helperText="2 Meter Run (Duration)"
+        variant="filled" 
+        size="small" 
+        margin="dense" 
+        onChange={e => setRun(e.target.value)}
+        color="success"
+        required 
+      />
       <br />
-      <button type="submit">Submit</button>
-    </form>
+      <Button 
+        variant="contained" 
+        onClick={e => handleSubmit(e)}
+        sx={{ marginTop: 2, backgroundColor: "#42A242" }}>
+          Submit
+      </Button>
+    </>
   );
 }
 
