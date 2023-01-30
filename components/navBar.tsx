@@ -16,6 +16,11 @@ function Navbar(){
           </Link>
         </li>
         <li>
+          <Link href="/scoring-scale">
+              Scoring Scale
+          </Link>
+        </li>
+        <li>
           <Link href="/results">
             Results
           </Link>

@@ -7,12 +7,14 @@ export default function Results() {
     let [soldierData, setSoldierData] = useState<any[]>([]);
 
     useEffect(() => {
-        fetch("./api/soldiers", { method: "GET" })
+        let controller = new AbortController();
+        fetch("./api/soldiers", { method: "GET", signal: controller.signal })
             .then(res => {
                 res.json().then(json => {
                     setSoldierData(json);
                 })
-            });
+            })
+        return () => { console.log("abort"); controller.abort();}
     }, []);
 
     const cardStyle = {
