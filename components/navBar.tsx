@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-function Navbar(){
+function NavBar() {
   return (
     <nav>
       <ul>
@@ -11,23 +11,8 @@ function Navbar(){
           </Link>
         </li>
         <li>
-          <Link href="/scorecard">
-            Scorecard
-          </Link>
-        </li>
-        <li>
-          <Link href="/scoring-scale">
-              Scoring Scale
-          </Link>
-        </li>
-        <li>
           <Link href="/results">
             Results
-          </Link>
-        </li>
-        <li>
-          <Link href="/about-us">
-            About Us
           </Link>
         </li>
       </ul>
@@ -35,4 +20,4 @@ function Navbar(){
   );
 }
 
-export default Navbar;
+export default NavBar;
