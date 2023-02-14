@@ -1,12 +1,10 @@
-import clientPromise from '../lib/mongodb';
-import NewSoldierForm from '../components/NewSoldierForm';
-import Navbar from '../components/Navbar';
 import SliderTest from '../components/SliderTest';
+import NavBar from "../components/NavBar";
 
 export default function Home() {
   return (
     <div>
-      <Navbar />
+      <NavBar />
       <SliderTest 
         title="Max Deadlift" 
         sliderMin={0} 
