@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { useState, useEffect } from "react";
-import NavBar from "../components/navBar";
+import NavBar from "../components/NavBar";
 import { Table, TableContainer, TableHead, 
          TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { CSSProperties } from "@mui/styled-engine";
