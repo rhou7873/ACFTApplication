@@ -9,7 +9,7 @@
 
 .unselected {
     background-color: transparent !important;
-    color: black;
+    color: black !important;
 }
 
 .unselected:hover {

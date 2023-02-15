@@ -48,12 +48,12 @@ function SliderTest(props: SliderTestProps) {
         <ButtonGroup variant="contained">
           <Button 
             onClick={() => setMode(Mode.Slider)}
-            className={mode != Mode.Slider ? styles.unselected : undefined}>
+            className={mode != Mode.Slider ? styles.unselected : ""}>
               Slider
           </Button>
           <Button 
             onClick={() => setMode(Mode.Manual)}
-            className={mode != Mode.Manual ? styles.unselected : undefined}>
+            className={mode != Mode.Manual ? styles.unselected : ""}>
               Manual
           </Button>
         </ButtonGroup>
