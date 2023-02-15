@@ -34,10 +34,9 @@ function SliderTest(props: SliderTestProps) {
               min={props.sliderMin}
               max={props.sliderMax}
               step={props.sliderStep}
-              valueLabelDisplay="auto"
+              valueLabelDisplay="on"
               onChange={(e, value, activeThumb) => setSliderValue(value as number)}
             /> 
-            <Typography variant="h6">{sliderValue} {props.unit}</Typography>
           </>
           :
           <TextField 
