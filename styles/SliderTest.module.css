@@ -8,7 +8,7 @@
 }
 
 .unselected {
-    background-color: transparent;
+    background-color: transparent !important;
     color: black;
 }
 
