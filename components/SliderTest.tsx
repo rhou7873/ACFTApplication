@@ -35,6 +35,7 @@ function SliderTest(props: SliderTestProps) {
               max={props.sliderMax}
               step={props.sliderStep}
               valueLabelDisplay="on"
+              valueLabelFormat={x => `${x} ${props.unit}`}
               onChange={(e, value, activeThumb) => setSliderValue(value as number)}
             /> 
           </>
