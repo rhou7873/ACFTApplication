@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Slider, TextField, Typography } from '@mui/material'
+import { Button, ButtonGroup, InputAdornment, Slider, TextField, Typography } from '@mui/material'
 import React, { ChangeEvent, useState } from 'react'
 import styles from "../styles/SliderTest.module.css";
 
@@ -8,6 +8,7 @@ interface SliderTestProps {
   sliderMax: number, 
   sliderStep: number,
   defaultValue?: number,
+  unit: string
 }
 
 enum Mode {
@@ -22,25 +23,32 @@ function SliderTest(props: SliderTestProps) {
   return (
     <div className={styles.container}>
       <div>
-          <Typography variant="h3"><b>{props.title}</b></Typography>
+          <Typography variant="h4"><b>{props.title}</b></Typography>
       </div>
       <div className={`${styles.center} ${styles.input}`}>
         {mode == Mode.Slider ?
-          <Slider 
-            sx={{ width: "50%" }}
-            value={sliderValue}
-            min={props.sliderMin}
-            max={props.sliderMax}
-            step={props.sliderStep}
-            valueLabelDisplay="auto"
-            onChange={(e, value, activeThumb) => setSliderValue(value as number)}
-          /> :
+          <>
+            <Slider 
+              sx={{ width: "85%" }}
+              value={sliderValue}
+              min={props.sliderMin}
+              max={props.sliderMax}
+              step={props.sliderStep}
+              valueLabelDisplay="auto"
+              onChange={(e, value, activeThumb) => setSliderValue(value as number)}
+            /> 
+            <Typography variant="h6">{sliderValue} {props.unit}</Typography>
+          </>
+          :
           <TextField 
             size="small"
             value={sliderValue}
             onChange={e => setSliderValue(parseInt(e.target.value))}
             margin="none"
             className={`${styles.center} ${styles.textfield}`}
+            InputProps={{ 
+              endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment> 
+            }}
           />
         }
       </div>
