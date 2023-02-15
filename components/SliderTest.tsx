@@ -1,5 +1,6 @@
 import { Button, ButtonGroup, Slider, TextField, Typography } from '@mui/material'
 import React, { ChangeEvent, useState } from 'react'
+import styles from "../styles/SliderTest.module.css";
 
 interface SliderTestProps {
   title: string,
@@ -16,20 +17,17 @@ enum Mode {
 
 function SliderTest(props: SliderTestProps) {
   let [sliderValue, setSliderValue] = useState(props.defaultValue != undefined ? props.defaultValue : 0);
-  let [textValue, setTextValue] = useState(0);
   let [mode, setMode] = useState(Mode.Slider);
 
-  let selectedStyle = {
-    backgroundColor: "transparent",
-    color: "black"
-  }
-
   return (
-    <div>
-        <Typography variant="h3"><b>{props.title}</b></Typography>
+    <div className={styles.container}>
+      <div>
+          <Typography variant="h3"><b>{props.title}</b></Typography>
+      </div>
+      <div className={`${styles.center} ${styles.input}`}>
         {mode == Mode.Slider ?
           <Slider 
-            sx={{ width: "50%" }} 
+            sx={{ width: "50%" }}
             value={sliderValue}
             min={props.sliderMin}
             max={props.sliderMax}
@@ -41,21 +39,25 @@ function SliderTest(props: SliderTestProps) {
             size="small"
             value={sliderValue}
             onChange={e => setSliderValue(parseInt(e.target.value))}
+            margin="none"
+            className={`${styles.center} ${styles.textfield}`}
           />
         }
-        <br />
+      </div>
+      <div className={styles.center}>
         <ButtonGroup variant="contained">
           <Button 
             onClick={() => setMode(Mode.Slider)}
-            style={mode != Mode.Slider ? selectedStyle : undefined}>
+            className={`${styles.mode} ${mode != Mode.Slider ? styles.unselected : ""}`}>
               Slider
-        </Button>
+          </Button>
           <Button 
             onClick={() => setMode(Mode.Manual)}
-            style={mode != Mode.Manual ? selectedStyle : undefined}>
+            className={`${styles.mode} ${mode != Mode.Manual ? styles.unselected : ""}`}>
               Manual
           </Button>
         </ButtonGroup>
+      </div>
     </div>
   )
 }
