@@ -7,7 +7,7 @@ interface SliderTestProps {
   sliderMin: number,
   sliderMax: number, 
   sliderStep: number,
-  defaultValue?: number,
+  defaultValue?: string,
   unit: string
 }
 
@@ -17,7 +17,7 @@ enum Mode {
 }
 
 function SliderTest(props: SliderTestProps) {
-  let [sliderValue, setSliderValue] = useState(props.defaultValue != undefined ? props.defaultValue : 0);
+  let [sliderValue, setSliderValue] = useState(props.defaultValue != undefined ? props.defaultValue : "0");
   let [mode, setMode] = useState(Mode.Slider);
 
   return (
@@ -30,20 +30,20 @@ function SliderTest(props: SliderTestProps) {
           <>
             <Slider 
               sx={{ width: "85%" }}
-              value={sliderValue}
+              value={isNaN(parseInt(sliderValue)) ? 0 : parseInt(sliderValue)}
               min={props.sliderMin}
               max={props.sliderMax}
               step={props.sliderStep}
               valueLabelDisplay="on"
               valueLabelFormat={x => `${x} ${props.unit}`}
-              onChange={(e, value, activeThumb) => setSliderValue(value as number)}
+              onChange={(e, value, activeThumb) => setSliderValue(`${value}`)}
             /> 
           </>
           :
           <TextField 
             size="small"
             value={sliderValue}
-            onChange={e => setSliderValue(parseInt(e.target.value))}
+            onChange={e => setSliderValue(e.target.value)}
             margin="none"
             className={`${styles.center} ${styles.textfield}`}
             type="tel"
