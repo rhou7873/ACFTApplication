@@ -46,6 +46,7 @@ function SliderTest(props: SliderTestProps) {
             onChange={e => setSliderValue(parseInt(e.target.value))}
             margin="none"
             className={`${styles.center} ${styles.textfield}`}
+            type="tel"
             InputProps={{ 
               endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment> 
             }}
