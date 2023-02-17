@@ -8,14 +8,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case "POST":
             let bodyObject = JSON.parse(req.body);
             let myPost = await db.collection("soldierData").insertOne(bodyObject);
-            res.json(myPost);
+            res.status(200).json(myPost);
             break;
-        case "GET":
-            const allPosts = await db.collection("soldierData")
-                                        .find({})
-                                        .sort({ $natural: -1 })
-                                        .toArray();
-            res.status(200).json(allPosts);
+        default:
+            res.status(405).json({ error: "Invalid HTTP method " });
             break;
     }
 }

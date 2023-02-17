@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { useState, useEffect } from "react";
-import Navbar from "../components/navBar";
+import NavBar from "components/NavBar";
 import { Table, TableContainer, TableHead, 
          TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { CSSProperties } from "@mui/styled-engine";
@@ -36,7 +36,7 @@ export default function ScoringScale() {
 
     return (
         <div>
-            <Navbar />
+            <NavBar />
             {scoring.map(scale => {
                 return (
                     <TableContainer>

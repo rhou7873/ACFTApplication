@@ -1,36 +1,24 @@
-import NavBar from '../components/navBar'
-import clientPromise from '../lib/mongodb';
+import SliderTest from 'components/SliderTest';
+import NavBar from "components/NavBar";
 
-interface Props {
-    isConnected: boolean;
-    soldier: Object;
-}
-
-export async function getServerSideProps(context: any){
-    try {
-        const client = await clientPromise;
-        const db = client.db("appData");
-        const allPosts = await db.collection("soldierData").find({}).toArray();
-        return {
-            props: {
-                soldier: JSON.parse(JSON.stringify(allPosts)),
-                isConnected: true
-            }
-        }
-    } catch (e) {
-      console.error(e)
-      return {
-        props: { soldier: null, isConnected: false },
-      }
-    }
-}
-
-export default function Home(props: Props) {
+export default function Home() {
   return (
     <div>
-        <NavBar></NavBar>
-        <img src="army_derp.jpg"></img>
-        <h1>i am da armeh</h1>
+      <NavBar />
+      <SliderTest 
+        title="Max Deadlift" 
+        sliderMin={0} 
+        sliderMax={400}
+        sliderStep={1}  
+        unit="lbs"
+      />
+      {/* <SliderTest 
+        title="Standing Power Throw" 
+        sliderMin={0}
+        sliderMax={20}
+        sliderStep={0.1}
+        unit="m"
+      /> */}
     </div>
   )
 }

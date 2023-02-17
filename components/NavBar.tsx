@@ -1,18 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 
-function NavBar(){
+function NavBar() {
   return (
     <nav>
       <ul>
         <li>
           <Link href="/">
             Home
-          </Link>
-        </li>
-        <li>
-          <Link href="/scorecard">
-            Scorecard
           </Link>
         </li>
         <li>

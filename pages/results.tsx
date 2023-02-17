@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import NavBar from '../components/navBar';
+import NavBar from 'components/NavBar';
 import Card from "@mui/material/Card";
 import { CardContent, Typography } from '@mui/material';
 
