@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, InputAdornment, Slider, TextField, Typography } from '@mui/material'
 import React, { ChangeEvent, useState } from 'react'
-import styles from "../styles/SliderTest.module.css";
+import styles from "styles/SliderTest.module.css";
 
 interface SliderTestProps {
   title: string,

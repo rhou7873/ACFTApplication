@@ -1,5 +1,5 @@
-import SliderTest from '../components/SliderTest';
-import NavBar from "../components/NavBar";
+import SliderTest from 'components/SliderTest';
+import NavBar from "components/NavBar";
 
 export default function Home() {
   return (

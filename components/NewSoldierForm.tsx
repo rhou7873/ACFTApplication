@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {male, female} from '../public/scoring_scale/scoring_scales';
+import {male, female} from 'public/scoring_scale/scoring_scales';
 import { json } from 'stream/consumers';
 
 interface results_obj {
