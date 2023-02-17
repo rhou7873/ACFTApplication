@@ -15,6 +15,9 @@ return (
         <div>
             <RepCounter threshold={15}></RepCounter>
             <Stopwatch threshold={5}></Stopwatch>
+            <Stopwatch threshold={5}></Stopwatch>
+            <Stopwatch threshold={5}></Stopwatch>
+            <Stopwatch threshold={5}></Stopwatch>
         </div>
     </Card>
 );
