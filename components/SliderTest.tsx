@@ -28,7 +28,7 @@ function SliderTest(props: SliderTestProps) {
         {mode == Mode.Slider ?
           <>
             <Slider 
-              sx={{ width: "85%" }}
+              sx={{ width: "85%", userSelect: "none" }}
               value={isNaN(parseFloat(sliderValue)) ? 0 : parseFloat(sliderValue)}
               min={props.sliderMin}
               max={props.sliderMax}
@@ -36,7 +36,6 @@ function SliderTest(props: SliderTestProps) {
               valueLabelDisplay="on"
               valueLabelFormat={value => `${value} ${props.unit}`}
               onChange={(e, value, activeThumb) => setSliderValue(`${value}`)}
-              disableSwap
             /> 
           </>
           :
@@ -48,9 +47,11 @@ function SliderTest(props: SliderTestProps) {
             className={`${styles.center} ${styles.textfield}`}
             type="number"
             InputProps={{ 
-              endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment> 
+              endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment>
             }}
-          />
+          >
+            
+          </TextField>
         }
       </div>
       <div className={styles.center}>
