@@ -1,5 +1,5 @@
 import React from 'react';
-import SoldierForm from '../components/SoldierForm'
+import NewSoldierForm from '../components/NewSoldierForm'
 import NavBar from '../components/NavBar'
 import RepCounter from '../components/RepCounter'
 import { Card } from '@mui/material';
