@@ -36,6 +36,7 @@ function SliderTest(props: SliderTestProps) {
               valueLabelDisplay="on"
               valueLabelFormat={value => `${value} ${props.unit}`}
               onChange={(e, value, activeThumb) => setSliderValue(`${value}`)}
+              disableSwap
             /> 
           </>
           :
