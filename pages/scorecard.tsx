@@ -1,9 +1,9 @@
 import React from 'react';
-import SoldierForm from '../react_components/SoldierForm'
-import NavBar from '../components/navBar'
-import RepCounter from '../react_components/RepCounter'
+import SoldierForm from '../components/SoldierForm'
+import NavBar from '../components/NavBar'
+import RepCounter from '../components/RepCounter'
 import { Card } from '@mui/material';
-import Stopwatch from '../react_components/Stopwatch'
+import Stopwatch from '../components/Stopwatch'
 
 function scorecard() : JSX.Element{
 return (
