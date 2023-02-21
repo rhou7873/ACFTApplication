@@ -19,7 +19,6 @@ enum Mode {
 function SliderTest(props: SliderTestProps) {
   let [sliderValue, setSliderValue] = useState(props.defaultValue != undefined ? props.defaultValue : "0");
   let [mode, setMode] = useState(Mode.Slider);
-
   return (
     <div className={styles.container}>
       <div>
@@ -35,7 +34,7 @@ function SliderTest(props: SliderTestProps) {
               max={props.sliderMax}
               step={props.sliderStep}
               valueLabelDisplay="on"
-              valueLabelFormat={x => `${x} ${props.unit}`}
+              valueLabelFormat={value => `${value} ${props.unit}`}
               onChange={(e, value, activeThumb) => setSliderValue(`${value}`)}
             /> 
           </>
@@ -46,7 +45,7 @@ function SliderTest(props: SliderTestProps) {
             onChange={e => setSliderValue(e.target.value)}
             margin="none"
             className={`${styles.center} ${styles.textfield}`}
-            type="tel"
+            type="number"
             InputProps={{ 
               endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment> 
             }}

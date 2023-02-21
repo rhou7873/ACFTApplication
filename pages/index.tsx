@@ -8,37 +8,29 @@ export default function Home() {
     <div>
       <NavBar />
       <SliderTest 
-        title="Max Deadlift" 
+        title="MAX DEADLIFT" 
         sliderMin={0} 
         sliderMax={400}
-        sliderStep={10}  
-        unit="lbs"
+        sliderStep={1}  
+        unit="LBS"
       />
       <SliderTest 
-        title="Standing Power Throw" 
+        title="STANDING POWER THROW" 
         sliderMin={0} 
         sliderMax={40}
-        sliderStep={1}  
-        unit="meters"
+        sliderStep={0.1}  
+        unit="M"
       />
       <SliderTest 
-        title="Hand Release Pushups" 
+        title="HAND RELEASE PUSH-UPS" 
         sliderMin={0} 
-        sliderMax={400}
-        sliderStep={10}  
-        unit="reps"
+        sliderMax={100}
+        sliderStep={1}  
+        unit="REPS"
       />
-      <Stopwatch title="Two-Mile Run" threshold={15}/>
-      <Stopwatch title="Plank" threshold={15}/>
-      <Stopwatch title="Sprint Drag Carry" threshold={15}/>
-      {/* <SliderTest 
-        title="Standing Power Throw" 
-        sliderMin={0}
-        sliderMax={20}
-        sliderStep={0.1}
-        unit="m"
-      /> */}
-      {/* <ACFTNumPad /> */}
+      <Stopwatch title="PLANK" threshold={15}/>
+      <Stopwatch title="SPRINT DRAG CARRY" threshold={15}/>
+      <Stopwatch title="TWO-MILE RUN" threshold={15}/>
     </div>
   )
 }
