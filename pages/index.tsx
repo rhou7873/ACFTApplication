@@ -1,6 +1,5 @@
 import SliderTest from 'components/SliderTest';
 import NavBar from "components/NavBar";
-import ACFTNumPad from "components/ACFTNumPad";
 import Stopwatch from '../components/Stopwatch'
 
 export default function Home() {

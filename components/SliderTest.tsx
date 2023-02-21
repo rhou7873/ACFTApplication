@@ -22,14 +22,14 @@ function SliderTest(props: SliderTestProps) {
   return (
     <div className={styles.container}>
       <div>
-          <Typography variant="h4"><b>{props.title}</b></Typography>
+          <Typography variant="h4">{props.title}</Typography>
       </div>
       <div className={`${styles.center} ${styles.input}`}>
         {mode == Mode.Slider ?
           <>
             <Slider 
               sx={{ width: "85%" }}
-              value={isNaN(parseInt(sliderValue)) ? 0 : parseInt(sliderValue)}
+              value={isNaN(parseFloat(sliderValue)) ? 0 : parseFloat(sliderValue)}
               min={props.sliderMin}
               max={props.sliderMax}
               step={props.sliderStep}

@@ -33,7 +33,7 @@ export default function RepCounter(props : any) {
   return (
     <div>
       <div>
-          <Typography variant="h4"><b>{props.title}</b></Typography>
+          <Typography variant="h4">{props.title}</Typography>
       </div>
       <Button style={{ width: "100px", height: "100px", fontSize : "30px"}} variant="contained" onClick={handleClick} color={color}>{time / 1000}</Button>
     </div>
