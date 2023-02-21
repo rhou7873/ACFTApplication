@@ -1,10 +1,10 @@
 
 import react from 'react';
-import NumPad from 'react-numpad';
+// import NumPad from 'react-numpad';
 
 function ACFTNumPad() {
-    return ( 
-        <NumPad.Number />
+    return ( <></>
+        // <NumPad.Number />
     )
 }
 
