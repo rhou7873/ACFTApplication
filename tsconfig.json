@@ -17,6 +17,6 @@
     "noImplicitAny": true,
     "baseUrl": "./"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.tsx", "pages/_app.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.tsx", "pages/_app.tsx", "pages/test"],
   "exclude": ["node_modules"]
 }

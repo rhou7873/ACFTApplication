@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { Typography } from '@mui/material'
+import styles from "styles/StopwatchTest.module.css"
 
+interface StopwatchTestProps {
+  threshold: number,
+  title: string,
+  nextPage: string
+}
 
-export default function RepCounter(props : any) {
+export default function StopwatchTest(props : any) {
   const [color, setColor] : any = useState('error');
   const [time, setTime] = useState(0);
   const [started, setStarted] = useState(false);

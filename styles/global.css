@@ -9,8 +9,8 @@ body {
     padding: 20px 20px 60px;
     max-width: 1000px;
     margin: 0 auto;
-    color: rgb(66, 162, 66);
-    background-color: blanchedalmond;
+    color: #030000;
+    background-color: white;
     background-repeat: no-repeat;
 }
 nav {
@@ -77,20 +77,6 @@ select {
 textarea:focus,
 select:focus{
 	background: #d2d9dd;
-}
-
-.number {
-	background: #1abc9c;
-	color: #fff;
-	height: 30px;
-	width: 30px;
-	display: inline-block;
-	font-size: 0.8em;
-	margin-right: 4px;
-	line-height: 30px;
-	text-align: center;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-	border-radius: 15px 15px 15px 0px;
 }
 
 

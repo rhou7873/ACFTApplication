@@ -1,35 +1,20 @@
-import SliderTest from 'components/SliderTest';
+import { Button } from "@mui/material";
 import NavBar from "components/NavBar";
-import Stopwatch from '../components/Stopwatch'
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div>
       <NavBar />
-      <SliderTest 
-        title="MAX DEADLIFT" 
-        sliderMin={0} 
-        sliderMax={400}
-        sliderStep={1}  
-        unit="LBS"
-      />
-      <SliderTest 
-        title="STANDING POWER THROW" 
-        sliderMin={0} 
-        sliderMax={40}
-        sliderStep={0.1}  
-        unit="M"
-      />
-      <SliderTest 
-        title="HAND RELEASE PUSH-UPS" 
-        sliderMin={0} 
-        sliderMax={100}
-        sliderStep={1}  
-        unit="REPS"
-      />
-      <Stopwatch title="PLANK" threshold={15}/>
-      <Stopwatch title="SPRINT DRAG CARRY" threshold={15}/>
-      <Stopwatch title="TWO-MILE RUN" threshold={15}/>
+      <Button 
+        onClick={() => router.push("/test/mdl")}
+        variant="contained"
+        sx={{ marginTop: 5 }}>
+        Start Test
+      </Button>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import NewSoldierForm from '../components/NewSoldierForm'
 import NavBar from '../components/NavBar'
 import RepCounter from '../components/RepCounter'
 import { Card } from '@mui/material';
-import Stopwatch from '../components/Stopwatch'
+import Stopwatch from '../components/StopwatchTest'
 
 function scorecard() : JSX.Element{
 return (

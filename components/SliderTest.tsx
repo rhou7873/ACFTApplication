@@ -1,6 +1,7 @@
-import { Button, ButtonGroup, InputAdornment, Slider, TextField, Typography } from '@mui/material'
+import { Button, InputAdornment, TextField, Typography } from '@mui/material'
 import React, { ChangeEvent, useState } from 'react'
 import styles from "styles/SliderTest.module.css";
+import { useRouter } from "next/router";
 
 interface SliderTestProps {
   title: string,
@@ -8,65 +9,61 @@ interface SliderTestProps {
   sliderMax: number, 
   sliderStep: number,
   defaultValue?: string,
-  unit: string
-}
-
-enum Mode {
-  Slider,
-  Manual
+  unit: string,
+  nextPageUrl: string
 }
 
 function SliderTest(props: SliderTestProps) {
-  let [sliderValue, setSliderValue] = useState(props.defaultValue != undefined ? props.defaultValue : "0");
-  let [mode, setMode] = useState(Mode.Slider);
+  let [formVal, setFormVal] = useState(props.defaultValue != undefined ? props.defaultValue : "0");
+  let [validInput, setValidInput] = useState(true);
+  let [success, setSuccess] = useState(false);
+  const router = useRouter();
+
+  let handleClick = (e: React.MouseEvent) => {
+    if (isNaN(parseFloat(formVal))) {
+      setValidInput(false);
+      return;
+    }
+    setValidInput(true);
+    setSuccess(true);
+    /* API call */
+    router.push(props.nextPageUrl);
+  }
+
+  let helperText = validInput ? "" :
+    <Typography 
+      color={"red"}
+      className={styles.errorText}
+      fontSize={14}>
+      <i>Invalid input</i>
+    </Typography>
+
   return (
     <div className={styles.container}>
       <div>
           <Typography variant="h4">{props.title}</Typography>
       </div>
-      <div className={`${styles.center} ${styles.input}`}>
-        {mode == Mode.Slider ?
-          <>
-            <Slider 
-              sx={{ width: "85%", userSelect: "none" }}
-              value={isNaN(parseFloat(sliderValue)) ? 0 : parseFloat(sliderValue)}
-              min={props.sliderMin}
-              max={props.sliderMax}
-              step={props.sliderStep}
-              valueLabelDisplay="on"
-              valueLabelFormat={value => `${value} ${props.unit}`}
-              onChange={(e, value, activeThumb) => setSliderValue(`${value}`)}
-            /> 
-          </>
-          :
-          <TextField 
-            size="small"
-            value={sliderValue}
-            onChange={e => setSliderValue(e.target.value)}
-            margin="none"
-            className={`${styles.center} ${styles.textfield}`}
-            type="number"
-            InputProps={{ 
-              endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment>
-            }}
-          >
-            
-          </TextField>
-        }
+      <div className={`${styles.input}`}>
+        <TextField 
+          id="textField"
+          // size="small"
+          value={formVal}     
+          onChange={e => setFormVal(e.target.value)}
+          margin="none"
+          className={`${styles.center} ${styles.textfield}`}
+          type="number"
+          InputProps={{ 
+            endAdornment: <InputAdornment position="end">{props.unit}</InputAdornment>
+          }}
+          error={!validInput}
+          helperText={helperText} />
       </div>
       <div className={styles.center}>
-        <ButtonGroup variant="contained">
-          <Button 
-            onClick={() => setMode(Mode.Slider)}
-            className={mode != Mode.Slider ? styles.unselected : ""}>
-              Slider
-          </Button>
-          <Button 
-            onClick={() => setMode(Mode.Manual)}
-            className={mode != Mode.Manual ? styles.unselected : ""}>
-              Manual
-          </Button>
-        </ButtonGroup>
+        <Button 
+          onClick={(e: React.MouseEvent) => handleClick(e)}
+          variant="contained">
+            Submit
+        </Button>
       </div>
     </div>
   )
