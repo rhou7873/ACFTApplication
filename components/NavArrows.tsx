@@ -10,19 +10,19 @@ interface NavArrowProps {
 
 function NavArrows(props: NavArrowProps) {
   const router = useRouter();
-
   return (
     <div> 
       <Button
         variant="contained"
         onClick={() => router.push(props.prevPageUrl as string)}>
-        <img className={styles.invertedArrow} src="/arrow.svg" />
+        ← 
       </Button>
       <span>&nbsp;</span> 
       <Button
+        className={styles.nextButtons}
         variant="contained"
         onClick={() => router.push(props.nextPageUrl as string)}>
-          <img src="/arrow.svg" />
+        →
       </Button>
     </div>
   )
