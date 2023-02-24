@@ -7,7 +7,7 @@ function TwoMileRun() {
       title="TWO-MILE RUN" 
       threshold={15} 
       prevPageUrl="/test/plk"
-       />
+      nextPageUrl="/" />
   )
 }
 

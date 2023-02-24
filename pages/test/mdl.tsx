@@ -9,6 +9,7 @@ function MaxDeadlift() {
         sliderMax={400}
         sliderStep={1}  
         unit="LBS"
+        prevPageUrl="/"
         nextPageUrl="/test/spt"
     />
   )

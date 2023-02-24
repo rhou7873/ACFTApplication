@@ -1,32 +1,29 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { Button } from "@mui/material";
+import styles from "styles/NavArrows.module.css"
 
 interface NavArrowProps {
-  prevPageUrl?: string,
-  nextPageUrl?: string
+  prevPageUrl: string,
+  nextPageUrl: string
 }
 
 function NavArrows(props: NavArrowProps) {
   const router = useRouter();
 
   return (
-    <div>
-      {props.prevPageUrl != undefined && 
-        <Button
-          variant="contained"
-          onClick={() => router.push(props.prevPageUrl as string)}>
-          🡄 
-        </Button>
-      }
+    <div> 
+      <Button
+        variant="contained"
+        onClick={() => router.push(props.prevPageUrl as string)}>
+        <img className={styles.invertedArrow} src="/arrow.svg" />
+      </Button>
       <span>&nbsp;</span> 
-      {props.nextPageUrl != undefined &&
-        <Button
-          variant="contained"
-          onClick={() => router.push(props.nextPageUrl as string)}>
-            🡆
-        </Button>
-      }
+      <Button
+        variant="contained"
+        onClick={() => router.push(props.nextPageUrl as string)}>
+          <img src="/arrow.svg" />
+      </Button>
     </div>
   )
 }

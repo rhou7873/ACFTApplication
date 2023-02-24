@@ -1,7 +1,6 @@
 import { Button, InputAdornment, TextField, Typography } from '@mui/material'
 import React, { ChangeEvent, useState } from 'react'
 import styles from "styles/NumEntry.module.css";
-import { useRouter } from "next/router";
 import NavArrows from "./NavArrows";
 
 interface NumEntryProps {
@@ -11,8 +10,8 @@ interface NumEntryProps {
   sliderStep: number,
   defaultValue?: string,
   unit: string,
-  nextPageUrl?: string,
-  prevPageUrl?: string
+  nextPageUrl: string,
+  prevPageUrl: string
 }
 
 function SliderTest(props: NumEntryProps) {
