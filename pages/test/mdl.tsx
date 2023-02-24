@@ -1,4 +1,4 @@
-import SliderTest from "components/SliderTest"
+import SliderTest from "components/NumEntryTest"
 import React from 'react'
 
 function MaxDeadlift() {

@@ -1,4 +1,4 @@
-import SliderTest from "components/SliderTest"
+import SliderTest from "components/NumEntryTest"
 import React from 'react'
 
 function StandingPowerThrow() {
@@ -9,6 +9,7 @@ function StandingPowerThrow() {
         sliderMax={40}
         sliderStep={0.1}  
         unit="M"
+        prevPageUrl="/test/mdl"
         nextPageUrl="/test/hrp"
     />
   )

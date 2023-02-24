@@ -3,7 +3,11 @@ import React from 'react'
 
 function SprintDragCarry() {
   return (
-    <StopwatchTest title="SPRINT DRAG CARRY" threshold={15}/>
+    <StopwatchTest 
+      title="SPRINT DRAG CARRY" 
+      threshold={15}
+      prevPageUrl="/test/hrp"
+      nextPageUrl="/test/plk" />
   )
 }
 

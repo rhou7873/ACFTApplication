@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { Typography } from '@mui/material'
 import styles from "styles/StopwatchTest.module.css"
+import NavArrows from "./NavArrows";
 
 interface StopwatchTestProps {
   threshold: number,
   title: string,
   nextPage: string
+  prevPageUrl?: string,
+  nextPageUrl?: string
 }
 
 export default function StopwatchTest(props : any) {
@@ -42,6 +45,9 @@ export default function StopwatchTest(props : any) {
           <Typography variant="h4">{props.title}</Typography>
       </div>
       <Button style={{ width: "100px", height: "100px", fontSize : "30px"}} variant="contained" onClick={handleClick} color={color}>{time / 1000}</Button>
+      <NavArrows 
+        prevPageUrl={props.prevPageUrl} 
+        nextPageUrl={props.nextPageUrl} />
     </div>
   );
 }

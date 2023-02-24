@@ -1,4 +1,4 @@
-import SliderTest from "components/SliderTest"
+import SliderTest from "components/NumEntryTest"
 import React from 'react'
 
 function HandReleasePushUps() {
@@ -10,6 +10,7 @@ function HandReleasePushUps() {
         sliderStep={1}  
         unit="REPS"
         nextPageUrl="/test/sdc"
+        prevPageUrl="/test/spt"
     />
   )
 }
