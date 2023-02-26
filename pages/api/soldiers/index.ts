@@ -1,5 +1,3 @@
-// not final
-
 import clientPromise from 'lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -18,6 +16,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                         .sort({ $natural: -1 })
                                         .toArray();
             res.status(200).json(allPosts);
+            break;
+        default:
+            res.status(405).json({ error: "Invalid HTTP method " });
             break;
     }
 }

@@ -1,3 +1,5 @@
+import Soldier from "types/soldier";
+
 const deadliftScores = {
     17: {
         'Male': {
@@ -406,5 +408,46 @@ function passed(soldier: Soldier): boolean {
     };
     return true;
 }
+
+// function calculateScore(soldier: Soldier) {
+//     let scale = soldier.gender;
+//     let age = soldier.age; 
+
+//     let eventNum = 0;
+//     // Iterate through event results
+//     for (const [event, result] of Object.entries(results).slice(4, -1)) {
+//       let eventKey = event as keyof typeof scale;
+//       let eventScale = scale[eventKey];
+//       let ageKey = age.toString() as keyof typeof eventScale;
+
+//       let eventScore = 0;
+
+//       // Iterate through scoring scale
+//       for (const [rr, es] of Object.entries(scale[eventKey][ageKey])){
+//         let required_result = Number(rr);
+//         let earned_score = Number(es);
+        
+//         // events counted in time
+//         if (eventNum >= 3) {
+//           required_result = Number(rr.split(":")[0]) * 60 + Number(rr.split(":")[1]);
+//         }
+
+//         // Events where you want the lowest time
+//         if (event == 'sprint_drag_carry' || event == 'two_mile_run') {
+//           if (result <= required_result) {
+//             eventScore = Math.max(earned_score, eventScore);
+//           }
+//         }else {
+//           // events where you want the highest number/time
+//           if (result >= required_result) {
+//             eventScore = Math.max(earned_score, eventScore);
+//           }
+//         }
+//       }
+//       eventNum += 1
+//       results.score += eventScore;
+//     }
+//     alert(results.score);
+// }
 
 export { mdl, spt, hrp, sdc, plk, tmr };
