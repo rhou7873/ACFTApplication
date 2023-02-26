@@ -389,25 +389,25 @@ function tmr(soldier: Soldier, time: string): void {
     
 }
 
-/**
- * Checks if the given soldier passed the Army Combat Fitness Test.
- * @param soldier - The soldier whose scores to check
- * @returns True if the given soldier passed, false otherwise.
- */
-function passed(soldier: Soldier): boolean {
-    if (!soldier.result) {
-        throw new Error(`Soldier ${soldier.firstName} ${soldier.lastName} test scores are not all populated`)
-    }
-    const result = soldier.result;
-    const props = Reflect.ownKeys(result);
-    for (const prop of props) {
-        let score = parseInt(Reflect.get(result, prop));
-        if (score < 60) {
-            return false;
-        }
-    };
-    return true;
-}
+// /**
+//  * Checks if the given soldier passed the Army Combat Fitness Test.
+//  * @param soldier - The soldier whose scores to check
+//  * @returns True if the given soldier passed, false otherwise.
+//  */
+// function passed(soldier: Soldier): boolean {
+//     if (soldier.score == -1) {
+//         throw new Error(`Soldier ${soldier.firstName} ${soldier.lastName} test scores are not all populated`)
+//     }
+//     const result = soldier.result;
+//     const props = Reflect.ownKeys(result);
+//     for (const prop of props) {
+//         let score = parseInt(Reflect.get(result, prop));
+//         if (score < 60) {
+//             return false;
+//         }
+//     };
+//     return true;
+// }
 
 // function calculateScore(soldier: Soldier) {
 //     let scale = soldier.gender;
