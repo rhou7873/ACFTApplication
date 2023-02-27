@@ -1,10 +1,11 @@
 import { Button, InputAdornment, MenuItem, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from "styles/NumEntry.module.css";
 import ActiveTest from "types/activeTest";
 import Soldier from "types/soldier";
 import Grader from "types/grader";
 import NavArrows from "./NavArrows";
+import SoldierDropdown from "./SoldierDropdown";
 
 interface NumEntryProps {
   // test: ActiveTest,
@@ -26,43 +27,12 @@ function invalidValue(input: string) {
 }
 
 function NumEntryTest(props: NumEntryProps) {
-  let [formVal, setFormVal] = useState(props.defaultValue != undefined ? props.defaultValue : "");
-  let [dropdownVal, setDropdownVal] = useState("");
-  let [dropdownError, setDropdownError] = useState(false);
-  let [textInputError, setTextInputError] = useState(false);
-  let [success, setSuccess] = useState(false);
-  let [currSoldier, setCurrSoldier] = useState<Soldier>();
-  let [soldiers, setSoldiers] = useState([] as Soldier[]);
+  const [formVal, setFormVal] = useState(props.defaultValue != undefined ? props.defaultValue : "");
+  const [dropdownError, setDropdownError] = useState(false);
+  const [textInputError, setTextInputError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [currSoldier, setCurrSoldier] = useState<Soldier>();
   
-  // let soldiers: Soldier[] = props.test.graderSoldiers.get(props.grader) as Soldier[];
-  
-  // Gets soldiers associated with this grader
-  useEffect(() => {
-    fetch("../api/soldiers", { method: "GET" })
-    .then(res => {
-      res.json()
-        .then(json => {
-          setSoldiers(json);
-        })
-    })
-  }, []);
-
-  useEffect(() => {
-    if (soldiers.length > 0) {
-      if (props.testName !== "mdl") {
-        soldiers.sort((a, b) => a.mdl - b.mdl);
-      }
-      setCurrSoldier(soldiers[soldiers.length - 1]);
-      console.log(soldiers);
-    }
-  }, [soldiers])
-
-  useEffect(() => {
-    if (currSoldier != undefined) {
-      setDropdownVal(currSoldier._id.toString());
-    }
-  }, [currSoldier])
-
   let handleSubmit = (e: React.MouseEvent) => {
     if (currSoldier == undefined) {
       setDropdownError(true);
@@ -86,15 +56,13 @@ function NumEntryTest(props: NumEntryProps) {
       })
   }
 
-  let handleSelect = (e: any) => {
-    setDropdownError(false);
+  function syncData(soldier: Soldier) {
+    setCurrSoldier(soldier);
+  }
+
+  let handleSelect = () => {
     setSuccess(false);
     setFormVal("");
-    soldiers.forEach(soldier => {
-      if (soldier._id.toString() === e.target.value) {
-        setCurrSoldier(soldier);
-      }
-    })
   }
 
   let getHelperText = () => {
@@ -122,23 +90,11 @@ function NumEntryTest(props: NumEntryProps) {
 
   return (
     <div className={styles.container}>
-      <TextField
-        defaultValue=""
-        value={dropdownVal}
-        onChange={e => handleSelect(e)}
-        error={dropdownError}
-        variant="outlined"
-        select>
-          {soldiers.map(soldier => {
-            return (
-              <MenuItem 
-                key={soldier._id.toString()}
-                value={soldier._id.toString()}>
-                  {soldier.firstName} {soldier.lastName}
-              </MenuItem>
-            )
-          })} 
-      </TextField>      
+      <SoldierDropdown
+        onChange={handleSelect} 
+        syncData={syncData}
+        testName={props.testName}
+        error={dropdownError} />    
       <div className={styles.testTitle}>
           <Typography variant="h4">{props.title}</Typography>
       </div>

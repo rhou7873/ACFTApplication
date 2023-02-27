@@ -5,6 +5,7 @@ function Plank() {
   return (
     <StopwatchTest 
       title="PLANK" 
+      testName="plk"
       threshold={15}
       prevPageUrl="/test/sdc" 
       nextPageUrl="/test/2mr" />
