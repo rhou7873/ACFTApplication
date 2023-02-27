@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb";
-import Gender from "types/gender";
 
 /**
  * Encapsulates data about a soldier

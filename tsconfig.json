@@ -17,6 +17,6 @@
     "noImplicitAny": true,
     "baseUrl": "./",
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.tsx", "pages/test"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_app.tsx", "pages/test", "pages/api/soldiers/[soldierId]"],
   "exclude": ["node_modules"]
 }

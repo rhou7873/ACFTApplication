@@ -1,10 +1,11 @@
-import SliderTest from "components/NumEntryTest"
+import NumEntryTest from "components/NumEntryTest"
 import React from 'react'
 
 function HandReleasePushUps() {
   return (
-    <SliderTest 
-        title="HAND RELEASE PUSH-UPS" 
+    <NumEntryTest 
+        title="HAND RELEASE PUSH-UPS"
+        testName="hrp"
         sliderMin={0} 
         sliderMax={100}
         sliderStep={1}  

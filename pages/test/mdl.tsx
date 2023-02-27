@@ -1,10 +1,11 @@
-import SliderTest from "components/NumEntryTest"
+import NumEntryTest from "components/NumEntryTest"
 import React from 'react'
 
 function MaxDeadlift() {
   return (
-    <SliderTest 
+    <NumEntryTest
         title="MAX DEADLIFT" 
+        testName="mdl"
         sliderMin={0} 
         sliderMax={400}
         sliderStep={1}  
