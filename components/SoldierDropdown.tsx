@@ -1,6 +1,7 @@
 import { MenuItem, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react"
 import Soldier from "types/soldier";
+import styles from "styles/SoldierDropdown.module.css";
 
 interface SoldierDropdownProps {
     error: boolean,
@@ -53,23 +54,26 @@ function SoldierDropdown(props: SoldierDropdownProps) {
     }
 
     return (
-        <TextField
-            defaultValue=""
-            value={dropdownVal}
-            onChange={e => handleSelect(e)}
-            error={props.error}
-            variant="outlined"
-            select>
-            {soldiers.map(soldier => {
-                return (
-                <MenuItem 
-                    key={soldier._id.toString()}
-                    value={soldier._id.toString()}>
-                    {soldier.firstName} {soldier.lastName}
-                </MenuItem>
-                )
-            })} 
-        </TextField>     
+        <div className={styles.container}>
+            <TextField
+                defaultValue=""
+                value={dropdownVal}
+                onChange={e => handleSelect(e)}
+                error={props.error}
+                variant="outlined"
+                fullWidth
+                select>
+                {soldiers.map(soldier => {
+                    return (
+                    <MenuItem 
+                        key={soldier._id.toString()}
+                        value={soldier._id.toString()}>
+                        {soldier.firstName} {soldier.lastName}
+                    </MenuItem>
+                    )
+                })} 
+            </TextField>     
+        </div>
     )
 }
 

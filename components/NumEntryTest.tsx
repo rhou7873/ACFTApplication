@@ -12,9 +12,6 @@ interface NumEntryProps {
   // grader: Grader,
   title: string,
   testName: string,
-  sliderMin: number,
-  sliderMax: number, 
-  sliderStep: number,
   defaultValue?: string,
   unit: string,
   nextPageUrl: string,
@@ -113,15 +110,16 @@ function NumEntryTest(props: NumEntryProps) {
           helperText={getHelperText()} />
       </div>
       <div className={styles.center}>
-        <Button 
+        <Button
+          className={styles.submitButton}
           onClick={(e: React.MouseEvent) => handleSubmit(e)}
           variant="contained">
             Submit
         </Button>
       </div>
-      <div className={styles.guidelinesContainer}>
+      {/* <div className={styles.guidelinesContainer}>
           
-      </div>
+      </div> */}
       <NavArrows
         prevPageUrl={props.prevPageUrl}
         nextPageUrl={props.nextPageUrl} />

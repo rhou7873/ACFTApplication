@@ -31,6 +31,10 @@
     width: 100;
 }
 
+.submitButton {
+    margin-bottom: 15px;
+}
+
 .successMsg {
     margin-left: -50px;
 }

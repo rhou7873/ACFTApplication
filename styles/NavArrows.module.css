@@ -1,0 +1,10 @@
+.container {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 30px !important;
+}
+
+.middleBlock {
+    width: 20px;
+    display: inline-block;
+}

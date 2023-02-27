@@ -11,13 +11,13 @@ interface NavArrowProps {
 function NavArrows(props: NavArrowProps) {
   const router = useRouter();
   return (
-    <div> 
+    <div className={styles.container}> 
       <Button
         variant="contained"
         onClick={() => router.push(props.prevPageUrl as string)}>
         ← 
       </Button>
-      <span>&nbsp;</span> 
+      <span className={styles.middleBlock}></span> 
       <Button
         className={styles.nextButtons}
         variant="contained"
