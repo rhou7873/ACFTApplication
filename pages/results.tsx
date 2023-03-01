@@ -17,6 +17,7 @@ export default function Results() {
     }, []);
 
     const cardStyle = {
+        padding: 3,
         marginBottom: 5,        
         borderRadius: 2,
         backgroundColor: "#F0F0F0",
@@ -28,7 +29,7 @@ export default function Results() {
             <NavBar></NavBar>
             <div style={{ marginTop: 20 }}>
                 {soldierData.map((soldier: Soldier) => {
-                    return (soldier.score != -1 &&
+                    return (/* soldier.score != -1 && */
                         <Card key={soldier._id.toString()} sx={cardStyle}>
                             <CardContent>
                                 <Typography variant="h4">
@@ -39,7 +40,7 @@ export default function Results() {
                                 </Typography>
                                 <Typography sx={{ marginLeft: 3 }} >
                                     <p>Age: {soldier.age}</p>
-                                    <p>Age Group: {soldier.ageGroup}</p>
+                                    <p>Age Group: {soldier.ageGroup}-{soldier.ageGroup + 4}</p>
                                     <p>Gender: {soldier.gender}</p>
                                     <p>MDL: {soldier.mdl}</p>
                                     <p>SPT: {soldier.spt}</p>

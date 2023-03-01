@@ -17,9 +17,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         "mdl": (r: string) => parseInt(r),
         "spt": (r: string) => parseFloat(r), 
         "hrp": (r: string) => parseInt(r), 
-        "sdc": (r: string) => parseInt(r), 
-        "plk": (r: string) => parseInt(r), 
-        "tmr": (r: string) => parseInt(r), 
+        "sdc": (r: string) => parseFloat(r), 
+        "plk": (r: string) => parseFloat(r), 
+        "tmr": (r: string) => parseFloat(r), 
         "score": (r: string) => parseInt(r),
         "age": (r: string) => parseInt(r),
         "ageGroup": (r: string) => parseInt(r)

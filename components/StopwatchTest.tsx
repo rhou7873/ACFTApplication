@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, MenuItem, TextField } from '@mui/material';
+import { Button, Card, createTheme, MenuItem, TextField } from '@mui/material';
 import { Typography } from '@mui/material'
 import styles from "styles/StopwatchTest.module.css"
 import Soldier from "types/soldier";
@@ -18,21 +18,24 @@ interface StopwatchTestProps {
 }
 
 export default function StopwatchTest(props : StopwatchTestProps) {
-  const [color, setColor] : any = useState('error');
   const [time, setTime] = useState(0);
+  const [render, setRender] = useState(0);
   const [started, setStarted] = useState(false);
   const [currSoldier, setCurrSoldier] = useState<Soldier>();
   const [dropdownError, setDropdownError] = useState(false);
+  const [showMsg, setShowMsg] = useState(false);
 
   function handleClick() {
     // Use updater function when new state is derived from old
     setStarted(!started);
-    if(time >= (props.threshold) * 1000){
-        setColor('success');
-    }
   };
 
+  function handleReset() {
+    setTime(0);
+  }
+
   function handleSelect() {
+    setStarted(false);
     setTime(0);
   }
 
@@ -41,16 +44,26 @@ export default function StopwatchTest(props : StopwatchTestProps) {
   }
 
   function getTime(){
-    setTime((time) => time + 100);
+    setTime((time) => time + 10);
   }
 
   useEffect(() => {
     let interval : any = null;
     if (started) {
-      interval = setInterval(() => getTime(), 100);
-    } else if (interval && !started) {
+      interval = setInterval(() => getTime(), 10);
+      setShowMsg(false);
+    } else if (!started && render > 0) {
+      fetch(`/api/soldiers/${currSoldier?._id}/${props.testName}/
+        ${time / 1000}`, { method: "PATCH" }) 
+        .then(res => {
+          res.json().then(json => {
+            console.log(json);
+          })
+        })     
       clearInterval(interval);
+      setShowMsg(true);
     }
+    setRender(render => render + 1);
     return () => clearInterval(interval);
   }, [started]);
 
@@ -64,13 +77,44 @@ export default function StopwatchTest(props : StopwatchTestProps) {
       <div>
           <Typography variant="h4">{props.title}</Typography>
       </div>
-      <Button 
-        style={{ width: "100px", height: "100px", fontSize : "30px"}} 
-        variant="contained" 
-        onClick={handleClick} 
-        color={color}>
-          {time / 1000}
-      </Button>
+      <div className={styles.watchContainer}>
+        <div className={styles.digitsContainer}>
+            <h2>
+              {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
+            </h2>
+            <h2>
+              {("0" + Math.floor((time / 1000) % 60)).slice(-2)}.
+            </h2>
+            <h2>
+              {("0" + ((time / 10) % 100)).slice(-2)}
+            </h2>
+        </div>
+        <div className={styles.msgContainer} style={{ visibility: showMsg ? "visible" : "hidden" }}>
+          <Typography color="success">
+            <i>Time submitted successfully</i>
+          </Typography>
+        </div>
+        <div>
+          <Button 
+            className={styles.watchButton}
+            variant="contained" 
+            onClick={handleClick} 
+            color={started ? "error" : "success"}>
+              <Typography variant="h5">
+                {started ? "Stop" : "Start"}
+              </Typography>
+          </Button>
+          <Button 
+            className={styles.watchButton}
+            variant="outlined" 
+            onClick={handleReset} 
+            disabled={started}>
+              <Typography variant="h5">
+                Reset
+              </Typography>
+          </Button>
+        </div>
+      </div>
       <NavArrows 
         prevPageUrl={props.prevPageUrl} 
         nextPageUrl={props.nextPageUrl} />
