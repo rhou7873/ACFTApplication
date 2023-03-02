@@ -7,7 +7,7 @@ import Soldier from "types/soldier";
  * @param {number} lbs - Maximum deadlift in pounds (lbs)
  */
 function mdl(soldier: Soldier, lbs: number): number {
-    let scale = soldier.gender ? male : female;
+    let scale = soldier.gender == "Male" ? male : female;
     let ageGroup = soldier.ageGroup; 
 
     let eventKey = "deadlift" as keyof typeof scale;
@@ -67,7 +67,7 @@ function spt(soldier: Soldier, meters: number): number {
  * @param {number} count - The number of push-ups recorded
  */
 function hrp(soldier: Soldier, count: number): number {
-    let scale = soldier.gender ? male : female;
+    let scale = soldier.gender == "Male" ? male : female;
     let ageGroup = soldier.ageGroup; 
 
     let eventKey = "hand_release_push_up" as keyof typeof scale;
@@ -97,7 +97,25 @@ function hrp(soldier: Soldier, count: number): number {
  * @param {string} time - Overall time recorded for the sprint, drag, carry (mm:ss format)
  */
 function sdc(soldier: Soldier, time: string): void {
+  let scale = soldier.gender == "Male" ? male : female;
+  let ageGroup = soldier.ageGroup; 
+
+  let eventKey = "sprint_drag_carry" as keyof typeof scale;
+  let eventScale = scale[eventKey];
+  let ageKey = ageGroup.toString() as keyof typeof eventScale;
+  let scoringReference = scale[eventKey][ageKey];
+
+  let eventScore = 0;
+
+  // Iterate through scoring scale
+  for (const [rr, es] of Object.entries(scoringReference)){
+      let required_result = Number(rr.split(":")[0]) * 60 + Number(rr.split(":")[1]);
+      let earned_score = Number(es);
     
+      // events counted in time
+      // events where you want the highest number/time
+        // events counted in time
+  }
 }
 
 /**
@@ -139,8 +157,7 @@ function passed(soldier: Soldier): boolean {
 }
 
 function calculateScore(soldier: Soldier) {
-    let scale = soldier.gender;
-    let age = soldier.age; 
+    let scale = soldier.gender === "Male" ? male : female;    let age = soldier.age; 
 
     let eventNum = 0;
     // Iterate through event results
