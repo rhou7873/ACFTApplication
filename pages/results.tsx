@@ -3,6 +3,7 @@ import NavBar from 'components/NavBar';
 import Card from "@mui/material/Card";
 import { CardContent, Typography } from '@mui/material';
 import Soldier from "types/soldier";
+import { mdl, spt, hrp} from 'lib/scoreUtilities';
 
 export default function Results() {
     let [soldierData, setSoldierData] = useState<any[]>([]);
@@ -42,9 +43,9 @@ export default function Results() {
                                     <p>Age: {soldier.age}</p>
                                     <p>Age Group: {soldier.ageGroup}-{soldier.ageGroup + 4}</p>
                                     <p>Gender: {soldier.gender}</p>
-                                    <p>MDL: {soldier.mdl}</p>
-                                    <p>SPT: {soldier.spt}</p>
-                                    <p>HRP: {soldier.hrp}</p>
+                                    <p>MDL: {soldier.mdl + " -> " + mdl(soldier, soldier.mdl)}</p>
+                                    <p>SPT: {soldier.spt + " -> " + spt(soldier, soldier.spt)}</p>
+                                    <p>HRP: {soldier.hrp + " -> " + hrp(soldier, soldier.hrp)}</p>
                                     <p>SDC: {soldier.sdc}</p>
                                     <p>PLK: {soldier.plk}</p>
                                     <p>2MR: {soldier.tmr}</p>

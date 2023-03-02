@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 
-/**
+/*
  * Encapsulates data about a soldier
  */
 export default interface Soldier {
