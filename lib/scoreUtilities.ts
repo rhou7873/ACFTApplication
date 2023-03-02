@@ -4,9 +4,9 @@ import Soldier from "types/soldier";
 /**
  * Calculates and sets the given soldier's maximum deadlift score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
- * @param {number} lbs - Maximum deadlift in pounds (lbs)
+ * @param {Number} lbs - Maximum deadlift in pounds (lbs)
  */
-function mdl(soldier: Soldier, lbs: number): number {
+function mdl(soldier: Soldier, lbs: Number): number {
     let scale = soldier.gender == "Male" ? male : female;
     let ageGroup = soldier.ageGroup; 
 
@@ -23,7 +23,7 @@ function mdl(soldier: Soldier, lbs: number): number {
         let earned_score = Number(es);
       
         // events counted in time
-        // events where you want the highest number/time
+        // events where you want the highest Number/time
         if (lbs >= required_result) {
             eventScore = Math.max(earned_score, eventScore);
         }
@@ -34,9 +34,9 @@ function mdl(soldier: Soldier, lbs: number): number {
 /**
  * Calculates and sets the given soldier's standing power throw score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
- * @param {number} meters - The number of meters recorded for the standing power throw
+ * @param {Number} meters - The Number of meters recorded for the standing power throw
  */
-function spt(soldier: Soldier, meters: number): number {
+function spt(soldier: Soldier, meters: Number): number {
     let scale = soldier.gender ? male : female;
     let ageGroup = soldier.ageGroup; 
 
@@ -53,7 +53,7 @@ function spt(soldier: Soldier, meters: number): number {
         let earned_score = Number(es);
       
         // events counted in time
-        // events where you want the highest number/time
+        // events where you want the highest Number/time
         if (meters >= required_result) {
             eventScore = Math.max(earned_score, eventScore);
         }
@@ -64,9 +64,9 @@ function spt(soldier: Soldier, meters: number): number {
 /**
  * Calculates and sets the given soldier's push-ups score
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
- * @param {number} count - The number of push-ups recorded
+ * @param {Number} count - The Number of push-ups recorded
  */
-function hrp(soldier: Soldier, count: number): number {
+function hrp(soldier: Soldier, count: Number): number {
     let scale = soldier.gender == "Male" ? male : female;
     let ageGroup = soldier.ageGroup; 
 
@@ -83,7 +83,7 @@ function hrp(soldier: Soldier, count: number): number {
         let earned_score = Number(es);
       
         // events counted in time
-        // events where you want the highest number/time
+        // events where you want the highest Number/time
         if (count >= required_result) {
             eventScore = Math.max(earned_score, eventScore);
         }
@@ -96,7 +96,7 @@ function hrp(soldier: Soldier, count: number): number {
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Overall time recorded for the sprint, drag, carry (mm:ss format)
  */
-function sdc(soldier: Soldier, time: string): void {
+function sdc(soldier: Soldier, time: Number): number {
   let scale = soldier.gender == "Male" ? male : female;
   let ageGroup = soldier.ageGroup; 
 
@@ -111,11 +111,12 @@ function sdc(soldier: Soldier, time: string): void {
   for (const [rr, es] of Object.entries(scoringReference)){
       let required_result = Number(rr.split(":")[0]) * 60 + Number(rr.split(":")[1]);
       let earned_score = Number(es);
-    
-      // events counted in time
-      // events where you want the highest number/time
-        // events counted in time
+     
+      if (Number(time) <= required_result) {
+        eventScore = Math.max(earned_score, eventScore);
+      }
   }
+  return eventScore;
 }
 
 /**
@@ -123,8 +124,27 @@ function sdc(soldier: Soldier, time: string): void {
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Time recorded for plank test (mm:ss format)
  */
-function plk(soldier: Soldier, time: string): void {
-    
+function plk(soldier: Soldier, time: string): number {
+  let scale = soldier.gender == "Male" ? male : female;
+  let ageGroup = soldier.ageGroup; 
+
+  let eventKey = "plank" as keyof typeof scale;
+  let eventScale = scale[eventKey];
+  let ageKey = ageGroup.toString() as keyof typeof eventScale;
+  let scoringReference = scale[eventKey][ageKey];
+
+  let eventScore = 0;
+
+  // Iterate through scoring scale
+  for (const [rr, es] of Object.entries(scoringReference)){
+      let required_result = Number(rr.split(":")[0]) * 60 + Number(rr.split(":")[1]);
+      let earned_score = Number(es);
+     
+      if (Number(time) >= required_result) {
+        eventScore = Math.max(earned_score, eventScore);
+      }
+  }
+  return eventScore;
 }
 
 /**
@@ -132,8 +152,26 @@ function plk(soldier: Soldier, time: string): void {
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Time recorded for the two-mile run (mm:ss format)
  */
-function tmr(soldier: Soldier, time: string): void {
-    
+function tmr(soldier: Soldier, time: string): number {
+  let scale = soldier.gender == "Male" ? male : female;
+  let ageGroup = soldier.ageGroup; 
+
+  let eventKey = "two_mile_run" as keyof typeof scale;
+  let eventScale = scale[eventKey];
+  let ageKey = ageGroup.toString() as keyof typeof eventScale;
+  let scoringReference = scale[eventKey][ageKey];
+  let eventScore = 0;
+
+  // Iterate through scoring scale
+  for (const [rr, es] of Object.entries(scoringReference)){
+      let required_result = Number(rr.split(":")[0]) * 60 + Number(rr.split(":")[1]);
+      let earned_score = Number(es);
+      
+      if (Number(time) <= required_result) {
+        eventScore = Math.max(earned_score, eventScore);
+      }
+  }
+  return eventScore;
 }
 
 /**
@@ -184,7 +222,7 @@ function calculateScore(soldier: Soldier) {
             eventScore = Math.max(earned_score, eventScore);
           }
         }else {
-          // events where you want the highest number/time
+          // events where you want the highest Number/time
           if (result >= required_result) {
             eventScore = Math.max(earned_score, eventScore);
           }
