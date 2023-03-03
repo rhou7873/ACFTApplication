@@ -124,7 +124,7 @@ function sdc(soldier: Soldier, time: Number): number {
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Time recorded for plank test (mm:ss format)
  */
-function plk(soldier: Soldier, time: string): number {
+function plk(soldier: Soldier, time: number): number {
   let scale = soldier.gender == "Male" ? male : female;
   let ageGroup = soldier.ageGroup; 
 
@@ -152,7 +152,7 @@ function plk(soldier: Soldier, time: string): number {
  * @param {Soldier} soldier - Soldier object that encapsulates data about the soldier
  * @param {string} time - Time recorded for the two-mile run (mm:ss format)
  */
-function tmr(soldier: Soldier, time: string): number {
+function tmr(soldier: Soldier, time: number): number {
   let scale = soldier.gender == "Male" ? male : female;
   let ageGroup = soldier.ageGroup; 
 
