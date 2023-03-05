@@ -8,12 +8,14 @@ export default function Home() {
   const router = useRouter()
 
   return (
-    <div>
-      <NavBar />
+    <div className="startTestContainer">
       <Button 
+        className="startTestBtn"
         onClick={() => router.push("/test/mdl")}
         variant="contained"
-        sx={{ marginTop: 5 }}>
+        size="large"
+        color="secondary"
+        fullWidth>
         Start Test
       </Button>
     </div>

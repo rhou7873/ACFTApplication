@@ -2,6 +2,7 @@ import 'styles/global.css'
 import { AppProps } from "next/app";
 import { Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import NavBar from "components/NavBar";
 
 export const THEME = createTheme({
   typography: {
@@ -23,9 +24,19 @@ export const THEME = createTheme({
   }
 });
 
+const navBarProps = {
+  elements: [
+    { title: "Grade", route: "/" },
+    { title: "Register", route: "/register"}
+  ]
+}
+
 export default function MyApp({Component, pageProps} : AppProps) : JSX.Element {
   return (
     <ThemeProvider theme={THEME}>
+      <div className="navbar">
+        <NavBar {...navBarProps} />
+      </div>
       <Component {...pageProps} />  
     </ThemeProvider>
   )

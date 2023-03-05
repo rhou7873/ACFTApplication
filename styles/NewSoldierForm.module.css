@@ -5,8 +5,13 @@
 .formContainer {
     display: flex;
     flex-direction: column;
+    margin-top: 15px;
 }
 
 .inputField {
     margin: 15px !important;
+}
+
+.submitButton {
+    margin-top: 40px;
 }

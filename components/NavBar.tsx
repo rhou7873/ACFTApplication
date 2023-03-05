@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { BottomNavigation, BottomNavigationAction, Button, ButtonGroup } from "@mui/material";
+import { useRouter } from "next/router";
 
-function NavBar() {
+interface NavBarElement {
+  title: string,
+  route: string
+}
+
+interface NavBarProps {
+  elements: NavBarElement[]
+}
+
+function NavBar(props: NavBarProps) {
+  const [selected, setSelected] = useState(props.elements[0].title);
+
+  const router = useRouter();
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link href="/">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link href="/results">
-            Results
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <ButtonGroup 
+      size="large"
+      fullWidth>
+      {props.elements?.map(e => {
+        return (
+          <Button 
+            variant={selected === e.title ? "contained" : "outlined"}
+            onClick={() => { setSelected(e.title); router.push(e.route) }}>
+              {e.title}
+          </Button>
+        )
+      })}
+    </ButtonGroup>
   );
 }
 

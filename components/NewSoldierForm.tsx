@@ -115,6 +115,7 @@ function SoldierForm() : JSX.Element{
             <MenuItem key="female" value="Female">Female</MenuItem>
           </TextField>
           <Button 
+            className={styles.submitButton}
             type="submit"
             variant="contained">
             Submit
