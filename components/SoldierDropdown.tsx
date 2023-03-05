@@ -56,7 +56,7 @@ function SoldierDropdown(props: SoldierDropdownProps) {
     return (
         <div className={styles.container}>
             <TextField
-                defaultValue=""
+                defaultValue="Loading..."
                 value={dropdownVal}
                 onChange={e => handleSelect(e)}
                 error={props.error}
