@@ -27,7 +27,6 @@ export default function Results() {
 
     return (
         <div>
-            <NavBar></NavBar>
             <div style={{ marginTop: 20 }}>
                 {soldierData.map((soldier: Soldier) => {
                     soldier.score = mdl(soldier, soldier.mdl) + spt(soldier, soldier.spt) + hrp(soldier, soldier.hrp) + sdc(soldier, soldier.sdc) + sdc(soldier, soldier.plk) + sdc(soldier, soldier.tmr);

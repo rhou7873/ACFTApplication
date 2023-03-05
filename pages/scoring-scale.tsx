@@ -36,7 +36,6 @@ export default function ScoringScale() {
 
     return (
         <div>
-            <NavBar />
             {scoring.map(scale => {
                 return (
                     <TableContainer>
