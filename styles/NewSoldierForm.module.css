@@ -3,8 +3,8 @@
 }
 
 .formContainer {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     margin-top: 15px;
 }
 
@@ -13,5 +13,5 @@
 }
 
 .submitButton {
-    margin-top: 40px;
+    margin-top: 40px !important;
 }

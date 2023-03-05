@@ -29,7 +29,7 @@ function SoldierDropdown(props: SoldierDropdownProps) {
     useEffect(() => {
         if (soldiers.length > 0) {
             if (props.testName !== "mdl") {
-            soldiers.sort((a, b) => a.mdl - b.mdl);
+                soldiers.sort((a, b) => a.mdl - b.mdl).reverse();
             }
             setCurrSoldier(soldiers[soldiers.length - 1]);
         }
