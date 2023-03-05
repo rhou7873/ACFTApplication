@@ -11,7 +11,7 @@ interface SoldierDropdownProps {
 }
 
 function SoldierDropdown(props: SoldierDropdownProps) {
-    const [dropdownVal, setDropdownVal] = useState("");
+    const [dropdownVal, setDropdownVal] = useState("Loading...");
     const [soldiers, setSoldiers] = useState([] as Soldier[]);
     const [currSoldier, setCurrSoldier] = useState<Soldier>();
 
