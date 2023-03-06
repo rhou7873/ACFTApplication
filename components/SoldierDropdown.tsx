@@ -76,7 +76,7 @@ function SoldierDropdown(props: SoldierDropdownProps) {
                             </MenuItem>
                         )
                     }) : 
-                    <MenuItem value="Fetching Soldiers...">
+                    <MenuItem value="Fetching Soldiers..." selected>
                         <i>Fetching soldiers...</i>
                     </MenuItem>
                 } 

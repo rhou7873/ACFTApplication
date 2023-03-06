@@ -8,7 +8,7 @@ function TwoMileRun() {
       testName="tmr" 
       threshold={15} 
       prevPageUrl="/test/plk"
-      nextPageUrl="/" />
+      nextPageUrl="/test/results" />
   )
 }
 

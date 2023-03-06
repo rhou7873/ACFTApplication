@@ -234,4 +234,9 @@ function calculateScore(soldier: Soldier) {
     alert(soldier.score);
 }
 
-export { mdl, spt, hrp, sdc, plk, tmr };
+function timeToString(seconds: number): string {
+  return `${("0" + Math.round((seconds / 60) % 60)).slice(-2)}:` +
+         `${("0" + Math.round(seconds % 60)).slice(-2)}`;
+}
+
+export { mdl, spt, hrp, sdc, plk, tmr, timeToString };
