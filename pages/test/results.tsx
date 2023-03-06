@@ -22,11 +22,13 @@ export default function Results() {
     }, []);
 
     const cardStyle = {
-        padding: 3,
-        marginBottom: 5,        
         borderRadius: 3,
         border: 1,
-        boxShadow: 4
+        boxShadow: 4,
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: 5,        
+        padding: 3
     };
 
     return (
@@ -34,10 +36,9 @@ export default function Results() {
             <div style={{ marginTop: 20 }}>
                 {soldierData.map((soldier: Soldier) => {
                     soldier.score = mdl(soldier, soldier.mdl) + spt(soldier, soldier.spt) + hrp(soldier, soldier.hrp) + sdc(soldier, soldier.sdc) + sdc(soldier, soldier.plk) + sdc(soldier, soldier.tmr);
-
                     return (
                         <Card key={soldier._id.toString()} sx={cardStyle}>
-                            <CardContent sx={{ userSelect: "none" }}>
+                            <CardContent sx={{ userSelect: "none", alignSelf: "center" }}>
                                 <Typography variant="h4">
                                     {soldier.firstName} {soldier.lastName}
                                 </Typography>
@@ -47,47 +48,47 @@ export default function Results() {
                                 <TableContainer sx={{ marginBottom: 4 }}>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>
+                                            <TableCell align="center">
                                                 <Typography variant="h6">Test</Typography>
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell align="center">
                                                 <Typography variant="h6">Result</Typography>
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell align="center">
                                                 <Typography variant="h6">Score</Typography>
                                             </TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         <TableRow>
-                                            <TableCell>MDL</TableCell>
-                                            <TableCell>{soldier.mdl} lbs</TableCell>
-                                            <TableCell>{mdl(soldier, soldier.mdl)}</TableCell>
+                                            <TableCell align="center">MDL</TableCell>
+                                            <TableCell align="center">{soldier.mdl} lbs</TableCell>
+                                            <TableCell align="center">{mdl(soldier, soldier.mdl)}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell>SPT</TableCell>
-                                            <TableCell>{soldier.spt.toFixed(1)} m</TableCell>
-                                            <TableCell>{spt(soldier, soldier.spt)}</TableCell>
+                                            <TableCell align="center">SPT</TableCell>
+                                            <TableCell align="center">{soldier.spt.toFixed(1)} m</TableCell>
+                                            <TableCell align="center">{spt(soldier, soldier.spt)}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell>HRP</TableCell>
-                                            <TableCell>{soldier.hrp} reps</TableCell>
-                                            <TableCell>{hrp(soldier, soldier.hrp)}</TableCell>
+                                            <TableCell align="center">HRP</TableCell>
+                                            <TableCell align="center">{soldier.hrp} reps</TableCell>
+                                            <TableCell align="center">{hrp(soldier, soldier.hrp)}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell>SDC</TableCell>
-                                            <TableCell>{timeToString(soldier.sdc)}</TableCell>
-                                            <TableCell>{sdc(soldier, soldier.sdc)}</TableCell>
+                                            <TableCell align="center">SDC</TableCell>
+                                            <TableCell align="center">{timeToString(soldier.sdc)}</TableCell>
+                                            <TableCell align="center">{sdc(soldier, soldier.sdc)}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell>PLK</TableCell>
-                                            <TableCell>{timeToString(soldier.plk)}</TableCell>
-                                            <TableCell>{plk(soldier, soldier.plk)}</TableCell>
+                                            <TableCell align="center">PLK</TableCell>
+                                            <TableCell align="center">{timeToString(soldier.plk)}</TableCell>
+                                            <TableCell align="center">{plk(soldier, soldier.plk)}</TableCell>
                                         </TableRow>
                                         <TableRow>
-                                            <TableCell>2MR</TableCell>
-                                            <TableCell>{timeToString(soldier.tmr)}</TableCell>
-                                            <TableCell>{tmr(soldier, soldier.tmr)}</TableCell>
+                                            <TableCell align="center">2MR</TableCell>
+                                            <TableCell align="center">{timeToString(soldier.tmr)}</TableCell>
+                                            <TableCell align="center">{tmr(soldier, soldier.tmr)}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </TableContainer>

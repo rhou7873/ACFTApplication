@@ -116,6 +116,7 @@ function SoldierForm() : JSX.Element{
           </TextField>
           <Button 
             className={styles.submitButton}
+            size="large"
             type="submit"
             variant="contained">
             Submit
