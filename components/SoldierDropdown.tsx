@@ -11,16 +11,19 @@ interface SoldierDropdownProps {
 }
 
 function SoldierDropdown(props: SoldierDropdownProps) {
-    const [dropdownVal, setDropdownVal] = useState("Loading...");
+    const [dropdownVal, setDropdownVal] = useState("");
+    const [fetchedSoldiers, setFetchedSoldiers] = useState(false);
     const [soldiers, setSoldiers] = useState([] as Soldier[]);
     const [currSoldier, setCurrSoldier] = useState<Soldier>();
 
     // Initializes soldiers array on first render
     useEffect(() => {
+        setDropdownVal("Loading...")
         fetch("../api/soldiers", { method: "GET" })
             .then(res => {
                 res.json().then(json => {
                     setSoldiers(json);
+                    setFetchedSoldiers(true);
                 })
             })
     }, []);
@@ -56,22 +59,27 @@ function SoldierDropdown(props: SoldierDropdownProps) {
     return (
         <div className={styles.container}>
             <TextField
-                defaultValue="Loading..."
+                defaultValue=""
                 value={dropdownVal}
                 onChange={e => handleSelect(e)}
                 error={props.error}
                 variant="outlined"
                 fullWidth
                 select>
-                {soldiers.map(soldier => {
-                    return (
-                    <MenuItem 
-                        key={soldier._id.toString()}
-                        value={soldier._id.toString()}>
-                        {soldier.firstName} {soldier.lastName}
+                {fetchedSoldiers ? 
+                    soldiers.map(soldier => {
+                        return (
+                            <MenuItem 
+                                key={soldier._id.toString()}
+                                value={soldier._id.toString()}>
+                                    {soldier.firstName} {soldier.lastName}
+                            </MenuItem>
+                        )
+                    }) : 
+                    <MenuItem value="Fetching Soldiers...">
+                        <i>Fetching soldiers...</i>
                     </MenuItem>
-                    )
-                })} 
+                } 
             </TextField>     
         </div>
     )

@@ -10,10 +10,10 @@
 }
 
 .watchButton {
-    border-radius: 12px;
-    margin: 0 8px;
-    width: 115px;
-    height: 65px;
+    border-radius: 12px !important;
+    margin: 0 8px !important;
+    width: 115px !important;
+    height: 65px !important;
 }
 
 .watchContainer {

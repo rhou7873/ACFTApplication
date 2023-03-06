@@ -112,6 +112,7 @@ function NumEntryTest(props: NumEntryProps) {
       <div className={styles.center}>
         <Button
           className={styles.submitButton}
+          size="large"
           onClick={(e: React.MouseEvent) => handleSubmit(e)}
           variant="contained">
             Submit
