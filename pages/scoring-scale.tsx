@@ -3,28 +3,29 @@ import { useState, useEffect } from "react";
 import NavBar from "components/NavBar";
 import { Table, TableContainer, TableHead, 
          TableBody, TableCell, TableRow, Typography } from "@mui/material";
-import { CSSProperties } from "@mui/styled-engine";
+import styles from "styles/ScoringScale.module.css";
 
 interface ScoreScale {
     _id: ObjectId,
     testName: string,
     testAbbreviation: string,
-    scores: object,
     lastUpdated: Date
+    fscores: object,
+    mscores: object
 }
 
 export default function ScoringScale() {
-    const [scoring, setScoring] = useState<ScoreScale[]>([]);
+    const [tests, setTests] = useState<ScoreScale[]>([]);
 
     useEffect(() => {
         fetch("./api/scoring-scale", { method: "GET" })
             .then(res => res.json())
             .then(json => {
-                setScoring(json);
+                setTests(json);
             });
     }, []);
 
-    let maleFemale: any[] = [];
+    let maleFemale: JSX.Element[] = [];
     for (let i = 0; i < 10; i++) {
         maleFemale.push(
             <>
@@ -34,9 +35,103 @@ export default function ScoringScale() {
         )
     }
 
+    let findResult = (scale: ScoreScale, gender: string, ageGroup: string, score: number): string => {
+        let scores = gender === "female" ? scale.fscores : scale.mscores;
+        let ageGroupScores = Reflect.get(scores, ageGroup);
+        let result = "-";
+        console.log(`${scale.testAbbreviation}, gender: ${gender}, ageGrou: ${ageGroup}, score: ${score}`)
+        console.log(Object.entries(ageGroupScores));
+        Object.entries(ageGroupScores)
+            .forEach(entry => {
+                if (entry[1] === score.toString()) {
+                    result = entry[0];
+                    return;
+                }
+            })
+        console.log("result: " + result);
+        return result;
+    }
+
+    let scoreData = (scale: ScoreScale) => {
+        let result: JSX.Element[] = [];
+        for (let score = 100; score >= 0; score--) {
+            result.push(
+                <TableRow>
+                    <TableCell align="center" className={styles.dataCell} >
+                        <Typography variant="caption">{score}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "17", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "17", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "22", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "22", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "27", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "27", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "32", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "32", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "37", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "37", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "42", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "42", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "47", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "47", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "52", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "52", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "57", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "57", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "male", "62", score)}</Typography>
+                    </TableCell>
+                    <TableCell className={styles.dataCell} align="center">
+                        <Typography variant="caption">{findResult(scale, "female", "62", score)}</Typography>
+                    </TableCell>
+                    <TableCell align="center" className={styles.dataCell} >
+                        <Typography variant="caption">{score}</Typography>
+                    </TableCell>
+                </TableRow>
+            )
+        }
+        return result;
+    }
+
     return (
         <div>
-            {scoring.map(scale => {
+            {tests.map(scale => {
                 return (
                     <TableContainer>
                         <Table size="small">
@@ -85,6 +180,9 @@ export default function ScoringScale() {
                                     {maleFemale}
                                     <TableCell align="center">Points</TableCell>
                                 </TableRow>
+                                {scoreData(scale).map(row => {
+                                    return row;
+                                })}
                             </TableHead>
                             <TableBody>
                                 

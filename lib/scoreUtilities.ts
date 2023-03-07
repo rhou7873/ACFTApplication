@@ -195,7 +195,8 @@ function passed(soldier: Soldier): boolean {
 }
 
 function calculateScore(soldier: Soldier) {
-    let scale = soldier.gender === "Male" ? male : female;    let age = soldier.age; 
+    let scale = soldier.gender === "Male" ? male : female;    
+    let age = soldier.age; 
 
     let eventNum = 0;
     // Iterate through event results
