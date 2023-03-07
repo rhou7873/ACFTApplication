@@ -1,8 +1,7 @@
 import { ObjectId } from "mongodb";
 import { useState, useEffect } from "react";
-import NavBar from "components/NavBar";
 import { Table, TableContainer, TableHead, 
-         TableBody, TableCell, TableRow, Typography } from "@mui/material";
+         TableBody, TableCell, TableRow, Typography, CircularProgress } from "@mui/material";
 import styles from "styles/ScoringScale.module.css";
 
 interface ScoreScale {
@@ -16,6 +15,8 @@ interface ScoreScale {
 
 export default function ScoringScale() {
     const [tests, setTests] = useState<ScoreScale[]>([]);
+    const [scoreTables, setScoreTables] = useState<JSX.Element[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch("./api/scoring-scale", { method: "GET" })
@@ -24,6 +25,76 @@ export default function ScoringScale() {
                 setTests(json);
             });
     }, []);
+
+    useEffect(() => {
+        setScoreTables(
+            tests.map(scale => {
+                return (
+                    <TableContainer sx={{ marginBottom: 5 }}>
+                        <Table size="small">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="center" colSpan={22}>
+                                        <h1>{scale.testName} ({scale.testAbbreviation.toUpperCase()})</h1>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell />
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>17-21</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>22-26</b> 
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>27-31</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>32-36</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>37-41</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>42-46</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>47-51</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>52-56</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>57-61</b>
+                                    </TableCell>
+                                    <TableCell align="center" colSpan={2}>
+                                        <b>Over 62</b>
+                                    </TableCell>
+                                    <TableCell />
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell align="center">Points</TableCell>
+                                    {maleFemale}
+                                    <TableCell align="center">Points</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {scoreData(scale).map(row => {
+                                    return row;
+                                })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                )
+            })
+        )
+    }, [tests])
+
+    useEffect(() => {
+        if (scoreTables.length > 0) {
+            setLoading(false);
+        }
+    }, [scoreTables])
 
     let maleFemale: JSX.Element[] = [];
     for (let i = 0; i < 10; i++) {
@@ -39,8 +110,6 @@ export default function ScoringScale() {
         let scores = gender === "female" ? scale.fscores : scale.mscores;
         let ageGroupScores = Reflect.get(scores, ageGroup);
         let result = "-";
-        console.log(`${scale.testAbbreviation}, gender: ${gender}, ageGrou: ${ageGroup}, score: ${score}`)
-        console.log(Object.entries(ageGroupScores));
         Object.entries(ageGroupScores)
             .forEach(entry => {
                 if (entry[1] === score.toString()) {
@@ -48,7 +117,6 @@ export default function ScoringScale() {
                     return;
                 }
             })
-        console.log("result: " + result);
         return result;
     }
 
@@ -130,70 +198,8 @@ export default function ScoringScale() {
     }
 
     return (
-        <div>
-            {tests.map(scale => {
-                return (
-                    <TableContainer>
-                        <Table size="small">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align="center" colSpan={22}>
-                                        <h1>{scale.testName} ({scale.testAbbreviation.toUpperCase()})</h1>
-                                    </TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell />
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>17-21</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>22-26</b> 
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>27-31</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>32-36</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>37-41</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>42-46</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>47-51</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>52-56</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>57-61</b>
-                                    </TableCell>
-                                    <TableCell align="center" colSpan={2}>
-                                        <b>Over 62</b>
-                                    </TableCell>
-                                    <TableCell />
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell align="center">Points</TableCell>
-                                    {maleFemale}
-                                    <TableCell align="center">Points</TableCell>
-                                </TableRow>
-                                {scoreData(scale).map(row => {
-                                    return row;
-                                })}
-                            </TableHead>
-                            <TableBody>
-                                
-                            </TableBody>
-                        </Table>
-                        <br />
-                        <br />
-                        <br />
-                    </TableContainer>
-                )
-            })}
+        <div className={styles.container}>
+            {loading ? <CircularProgress disableShrink variant="indeterminate" /> : scoreTables}
         </div>
     );
 }
