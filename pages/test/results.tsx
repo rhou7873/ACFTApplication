@@ -38,14 +38,14 @@ export default function Results() {
                     soldier.score = mdl(soldier, soldier.mdl) + spt(soldier, soldier.spt) + hrp(soldier, soldier.hrp) + sdc(soldier, soldier.sdc) + sdc(soldier, soldier.plk) + sdc(soldier, soldier.tmr);
                     return (
                         <Card key={soldier._id.toString()} sx={cardStyle}>
-                            <CardContent sx={{ userSelect: "none", alignSelf: "center" }}>
+                            <CardContent sx={{ userSelect: "none", width: "100%" }}>
                                 <Typography variant="h4">
                                     {soldier.firstName} {soldier.lastName}
                                 </Typography>
                                 <Typography variant="subtitle1">
                                     <i>{soldier.gender}, {soldier.age}</i>
                                 </Typography>
-                                <TableContainer sx={{ marginBottom: 4 }}>
+                                <TableContainer sx={{ marginBottom: 4 }}  >
                                     <TableHead>
                                         <TableRow>
                                             <TableCell align="center">

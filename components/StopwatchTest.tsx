@@ -19,11 +19,14 @@ interface StopwatchTestProps {
 
 export default function StopwatchTest(props : StopwatchTestProps) {
   const [time, setTime] = useState(0);
+  const [timer, setTimer] = useState<NodeJS.Timer>();
   const [render, setRender] = useState(0);
   const [started, setStarted] = useState(false);
   const [currSoldier, setCurrSoldier] = useState<Soldier>();
   const [dropdownError, setDropdownError] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(-1);
+  const [visibility, setVisibility] = useState("");
 
   function handleClick() {
     // Use updater function when new state is derived from old
@@ -43,14 +46,42 @@ export default function StopwatchTest(props : StopwatchTestProps) {
     setCurrSoldier(soldier);
   }
 
-  function getTime(){
-    setTime((time) => time + 10);
+  function getTime() {
+    setTime(time => time + 10);
+  }
+
+  let handleVisibilityChange = () => {
+    // Handle stopwatch pausing when page hidden
+    if (document.visibilityState === "hidden") {
+      setVisibility("hidden");
+    } else if (document.visibilityState === "visible") {
+      setVisibility("visible");
+    }
   }
 
   useEffect(() => {
-    let interval : any = null;
     if (started) {
-      interval = setInterval(() => getTime(), 10);
+      if (visibility === "hidden") {
+        let now = Date.now();
+        setTimeLeft(now);
+        clearInterval(timer);
+      } else if (visibility === "visible") {
+        let now = Date.now();
+        let diff = Math.round((now - timeLeft) / 10) * 10;
+        setTime(time => time + diff);
+        setTimer(setInterval(getTime, 10));
+      }
+    }
+  }, [visibility])
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [])
+
+  useEffect(() => {
+    if (started) {
+      setTimer(setInterval(getTime, 10));
       setShowMsg(false);
     } else if (!started && render > 0) {
       fetch(`/api/soldiers/${currSoldier?._id}/${props.testName}/
@@ -60,11 +91,10 @@ export default function StopwatchTest(props : StopwatchTestProps) {
             console.log(json);
           })
         })     
-      clearInterval(interval);
+      clearInterval(timer);
       setShowMsg(true);
     }
     setRender(render => render + 1);
-    return () => clearInterval(interval);
   }, [started]);
 
   return (

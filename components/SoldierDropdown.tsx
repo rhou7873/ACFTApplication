@@ -12,9 +12,10 @@ interface SoldierDropdownProps {
 
 function SoldierDropdown(props: SoldierDropdownProps) {
     const [dropdownVal, setDropdownVal] = useState("");
-    const [fetchedSoldiers, setFetchedSoldiers] = useState(false);
     const [soldiers, setSoldiers] = useState([] as Soldier[]);
     const [currSoldier, setCurrSoldier] = useState<Soldier>();
+    const [menuItems, setMenuItems] = useState<JSX.Element[]>([]);
+    const [loading, setLoading] = useState(true);
 
     // Initializes soldiers array on first render
     useEffect(() => {
@@ -23,7 +24,6 @@ function SoldierDropdown(props: SoldierDropdownProps) {
             .then(res => {
                 res.json().then(json => {
                     setSoldiers(json);
-                    setFetchedSoldiers(true);
                 })
             })
     }, []);
@@ -36,6 +36,15 @@ function SoldierDropdown(props: SoldierDropdownProps) {
             }
             setCurrSoldier(soldiers[0]);
         }
+        setMenuItems(soldiers.map(soldier => {
+            return (
+                <MenuItem 
+                    key={soldier._id.toString()}
+                    value={soldier._id.toString()}>
+                        {soldier.firstName} {soldier.lastName}
+                </MenuItem>
+            )
+        }))
     }, [soldiers])
     
     // Syncs currSoldier with parent and updates dropdownVal
@@ -45,6 +54,12 @@ function SoldierDropdown(props: SoldierDropdownProps) {
             setDropdownVal(currSoldier._id.toString());
         }
     }, [currSoldier])
+
+    useEffect(() => {
+        if (menuItems.length > 0) {
+            setLoading(false);
+        }
+    }, [menuItems])
 
     // Handler for dropdown selection change
     function handleSelect(e: any) {
@@ -66,19 +81,11 @@ function SoldierDropdown(props: SoldierDropdownProps) {
                 variant="outlined"
                 fullWidth
                 select>
-                {fetchedSoldiers ? 
-                    soldiers.map(soldier => {
-                        return (
-                            <MenuItem 
-                                key={soldier._id.toString()}
-                                value={soldier._id.toString()}>
-                                    {soldier.firstName} {soldier.lastName}
-                            </MenuItem>
-                        )
-                    }) : 
-                    <MenuItem value="Fetching Soldiers..." selected>
+                {loading ? 
+                    <MenuItem>
                         <i>Fetching soldiers...</i>
-                    </MenuItem>
+                    </MenuItem> :
+                    menuItems
                 } 
             </TextField>     
         </div>
