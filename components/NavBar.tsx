@@ -24,6 +24,7 @@ function NavBar(props: NavBarProps) {
       {props.elements?.map(e => {
         return (
           <Button 
+            key={e.title}
             variant={selected === e.title ? "contained" : "outlined"}
             onClick={() => { setSelected(e.title); router.push(e.route) }}>
               {e.title}

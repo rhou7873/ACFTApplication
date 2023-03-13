@@ -19,7 +19,6 @@ function SoldierDropdown(props: SoldierDropdownProps) {
 
     // Initializes soldiers array on first render
     useEffect(() => {
-        setDropdownVal("Loading...")
         fetch("../api/soldiers", { method: "GET" })
             .then(res => {
                 res.json().then(json => {

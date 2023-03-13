@@ -58,14 +58,21 @@ export default function StopwatchTest(props : StopwatchTestProps) {
       setVisibility("visible");
     }
   }
+  
+  useEffect(() => {
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [])
 
   useEffect(() => {
     if (started) {
       if (visibility === "hidden") {
+        // stop timer and record time that tab went out of focus
         let now = Date.now();
         setTimeLeft(now);
         clearInterval(timer);
       } else if (visibility === "visible") {
+        // add time gone to time and resume timer
         let now = Date.now();
         let diff = Math.round((now - timeLeft) / 10) * 10;
         setTime(time => time + diff);
@@ -73,12 +80,7 @@ export default function StopwatchTest(props : StopwatchTestProps) {
       }
     }
   }, [visibility])
-
-  useEffect(() => {
-    document.addEventListener("visibilitychange", handleVisibilityChange)
-    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
-  }, [])
-
+  
   useEffect(() => {
     if (started) {
       setTimer(setInterval(getTime, 10));
