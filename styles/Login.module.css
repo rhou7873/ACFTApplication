@@ -1,0 +1,13 @@
+.loginContainer {
+	display: flex;
+	flex-direction: column;
+	padding: 0 25%;
+}
+
+.header {
+    margin-bottom: 15px; 
+}
+
+.inputField {
+    margin-bottom: 30px;
+}

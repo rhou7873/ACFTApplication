@@ -106,7 +106,7 @@ export default function Results() {
                     fullWidth>
                         Confirm Results
                 </Button>
-                <NavArrows prevPageUrl="/test/2mr" nextPageUrl="/" />
+                <NavArrows prevPageUrl="/grader/2mr" nextPageUrl="/" />
             </div>
         </div>
     )

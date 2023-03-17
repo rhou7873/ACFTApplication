@@ -7,8 +7,8 @@ function Plank() {
       title="PLANK" 
       testName="plk"
       threshold={15}
-      prevPageUrl="/test/sdc" 
-      nextPageUrl="/test/2mr" />
+      prevPageUrl="/grader/sdc" 
+      nextPageUrl="/grader/2mr" />
   )
 }
 

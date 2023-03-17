@@ -1,10 +1,8 @@
 import 'styles/global.css'
 import { AppProps } from "next/app";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import NavBar from "components/NavBar";
 import { THEME } from "lib/config";
-import Role from "types/role";
-import { useEffect } from "react";
 
 const navBarProps = {
   elements: [

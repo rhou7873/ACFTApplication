@@ -7,8 +7,8 @@ function StandingPowerThrow() {
         title="STANDING POWER THROW" 
         testName="spt"
         unit="M"
-        prevPageUrl="/test/mdl"
-        nextPageUrl="/test/hrp"
+        prevPageUrl="/grader/mdl"
+        nextPageUrl="/grader/hrp"
     />
   )
 }

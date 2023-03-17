@@ -11,7 +11,7 @@ export default function Home() {
     <div className="startTestContainer">
       <Button 
         className="startTestBtn"
-        onClick={() => router.push("/test/mdl")}
+        onClick={() => router.push("/gtader/mdl")}
         variant="contained"
         size="large"
         color="secondary"

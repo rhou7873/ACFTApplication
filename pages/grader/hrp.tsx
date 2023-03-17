@@ -7,8 +7,8 @@ function HandReleasePushUps() {
         title="HAND RELEASE PUSH-UPS"
         testName="hrp"
         unit="REPS"
-        nextPageUrl="/test/sdc"
-        prevPageUrl="/test/spt"
+        nextPageUrl="/grader/sdc"
+        prevPageUrl="/grader/spt"
     />
   )
 }

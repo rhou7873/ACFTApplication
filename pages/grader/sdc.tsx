@@ -7,8 +7,8 @@ function SprintDragCarry() {
       title="SPRINT / DRAG / CARRY" 
       testName="sdc"
       threshold={15}
-      prevPageUrl="/test/hrp"
-      nextPageUrl="/test/plk" />
+      prevPageUrl="/grader/hrp"
+      nextPageUrl="/grader/plk" />
   )
 }
 

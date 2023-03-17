@@ -1,68 +1,67 @@
 import React, { useState } from "react";
-import {male, female} from "public/scoring_scale/scoring_scales";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
 import styles from "styles/NewSoldierForm.module.css";
+import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs from "dayjs";
+import sha256 from "crypto-js/sha256";
+import { useRouter } from "next/router";
 
 interface SoldierEntry {
+  _id: string,
   firstName: string,
   lastName: string,
-  email: string,
-  age: number,
-  ageGroup: number;
+  birthday: dayjs.Dayjs,
   gender: string,
-  mdl: number,
-  spt: number,
-  hrp: number,
-  sdc: number,
-  plk: number,
-  tmr: number,
-  score: number
+  role: string,
+  passwordHash: string
 }
 
 const ages = [17, 22, 27, 32, 37, 42, 47, 52, 57, 62]
-
-function getAgeGroup(results : SoldierEntry) : number {
-  let age = Number(results.age);
-  let i = 0
-  while (age > ages[i]) {
-    i += 1
-  }
-  return ages[i - 1];
-}
 
 function SoldierForm() : JSX.Element{
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [birthday, setBirthday] = useState(dayjs(new Date("1000-1-1")));
+  const [birthdayError, setBirthdayError] = useState(false);
   const [gender, setGender] = useState("Male");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [pwdError, setPwdError] = useState(false);
+
+  let router = useRouter();
 
   let handleSubmit = async (e: any) => {
     e.preventDefault();
+    if (birthday.year() === 1000) {
+      setBirthdayError(true);
+      return;
+    } else if (password !== confirmPassword) {
+      setPwdError(true);
+      return;
+    }
     let results: SoldierEntry = {
+      _id: email,
       firstName: firstName,
       lastName: lastName,
-      email: email,
-      age: parseInt(age),
-      ageGroup: -1,
-      gender : gender,
-      mdl: 0,
-      spt: 0,
-      hrp: 0,
-      sdc: 0,
-      plk: 0,
-      tmr: 0,
-      score: -1
+      birthday: birthday,
+      gender: gender,
+      role: "Soldier",
+      passwordHash: sha256(password).toString()
     };
-    results.ageGroup = getAgeGroup(results);
     await fetch("./api/soldiers", {
         method: "POST",
         body: JSON.stringify(results),
+    }).then(res => {
+      if (res.status == 409) {
+        setEmailError(true);
+      } else {
+        router.push("/login")
+      }
     });
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setAge("");
   }
 
   return (
@@ -85,25 +84,17 @@ function SoldierForm() : JSX.Element{
             size="small"
             name="lastName"
             label="Last Name"
-            required />            
-          <TextField 
-            className={styles.inputField}
-            value={email} 
-            type="email"
-            onChange={e => setEmail(e.target.value)} 
-            size="small"
-            name="email"
-            label="Email"
-            required />
-          <TextField 
-            className={styles.inputField}
-            type="number" 
-            value={age} 
-            onChange={e => setAge(e.target.value)} 
-            size="small"
-            name="age"
-            label="Age"
-            required />
+            required />      
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <MobileDatePicker 
+              label="Birthday"
+              slotProps={{
+                textField: { required: true, error: birthdayError, size: "small" }
+              }}
+              slots={{ textField: TextField }}
+              onChange={value => setBirthday(value as dayjs.Dayjs)}
+            />
+          </LocalizationProvider>
           <TextField 
             className={styles.inputField}
             value={gender} 
@@ -114,12 +105,44 @@ function SoldierForm() : JSX.Element{
             <MenuItem key="male" value="Male">Male</MenuItem>
             <MenuItem key="female" value="Female">Female</MenuItem>
           </TextField>
+          <TextField 
+            className={styles.inputField}
+            error={emailError}
+            value={email} 
+            type="email"
+            onChange={e => {setEmailError(false); setEmail(e.target.value)}} 
+            size="small"
+            name="email"
+            label="Email"
+            helperText={emailError ? "Email already exists" : ""}
+            required />
+          <TextField 
+            className={styles.inputField}
+            value={password} 
+            type="password"
+            onChange={e => {setPwdError(false); setPassword(e.target.value)}} 
+            size="small"
+            name="password"
+            label="Password"
+            error={pwdError}
+            required />
+          <TextField 
+            className={styles.inputField}
+            value={confirmPassword} 
+            type="password"
+            onChange={e => {setPwdError(false); setConfirmPassword(e.target.value)}} 
+            size="small"
+            name="confirmPassword"
+            label="Confirm Password"
+            error={pwdError}
+            helperText={pwdError ? "Doesn't match password" : ""}
+            required />
           <Button 
             className={styles.submitButton}
             size="large"
             type="submit"
             variant="contained">
-            Submit
+              Submit
           </Button>
         </div>
       </form>
