@@ -39,7 +39,7 @@ function NumEntryTest(props: NumEntryProps) {
       return;
     }
     setTextInputError(false);
-    fetch(`../api/soldiers/${currSoldier._id}/${props.testName}/${formVal}`,
+    fetch(`../api/soldiers/id/${currSoldier._id}/${props.testName}/${formVal}`,
           { method: "PATCH" })
       .then(res => {
         res.json()

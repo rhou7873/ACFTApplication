@@ -86,7 +86,7 @@ export default function StopwatchTest(props : StopwatchTestProps) {
       setTimer(setInterval(getTime, 10));
       setShowMsg(false);
     } else if (!started && render > 0) {
-      fetch(`/api/soldiers/${currSoldier?._id}/${props.testName}/
+      fetch(`/api/soldiers/id/${currSoldier?._id}/${props.testName}/
         ${time / 1000}`, { method: "PATCH" }) 
         .then(res => {
           res.json().then(json => {

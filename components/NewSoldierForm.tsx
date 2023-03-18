@@ -18,8 +18,6 @@ interface SoldierEntry {
   passwordHash: string
 }
 
-const ages = [17, 22, 27, 32, 37, 42, 47, 52, 57, 62]
-
 function SoldierForm() : JSX.Element{
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -89,7 +87,13 @@ function SoldierForm() : JSX.Element{
             <MobileDatePicker 
               label="Birthday"
               slotProps={{
-                textField: { required: true, error: birthdayError, size: "small" }
+                textField: { 
+                  required: true, 
+                  error: birthdayError, 
+                  size: "small",
+                  margin: "normal",
+                  sx: { margin: "15px" }
+                }
               }}
               slots={{ textField: TextField }}
               onChange={value => setBirthday(value as dayjs.Dayjs)}

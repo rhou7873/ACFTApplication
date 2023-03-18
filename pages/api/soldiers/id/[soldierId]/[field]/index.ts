@@ -13,7 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case "GET":
             const fieldValue = await collection
                                 .findOne({ 
-                                    "_id": new ObjectId(soldierId) 
+                                    // @ts-ignore
+                                    _id: soldierId
                                 }, {
                                     projection: {
                                         "_id": 0,
