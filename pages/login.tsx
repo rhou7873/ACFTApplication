@@ -31,7 +31,6 @@ function Login() {
             error={loginError}
             value={email} 
             onChange={e => {setLoginError(false); setEmail(e.target.value)}} 
-            size="small"
             name="email"
             label="Email"
             type="email"
@@ -41,15 +40,16 @@ function Login() {
             error={loginError}
             value={password} 
             onChange={e => {setLoginError(false); setPassword(e.target.value)}} 
-            size="small"
             name="password"
             label="Password"
             type="password"
             helperText={loginError ? "Email or password invalid" : ""}
             required />    
           <Button
+            size="large"
             variant="contained"
-            type="submit">
+            type="submit"
+            sx={{ height: 60 }}>
               Login
           </Button>
       </form>
