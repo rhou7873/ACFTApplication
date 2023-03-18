@@ -12,8 +12,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const users = await db.collection("users")
                                         //@ts-ignore
                                         .findOne({ _id: email, passwordHash: hash });
-            if (!users) res.status(401).json({ error: "User email or password not found" })
-            else res.status(200).json(users);
+            let status = "Success";
+            if (!users) status = "Failure"
+            res.status(200).json({ status: status });
             break;
         default:
             res.status(405).json({ error: "Invalid HTTP method " });

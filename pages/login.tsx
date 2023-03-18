@@ -12,11 +12,13 @@ function Login() {
     e.preventDefault();
     fetch(`/api/soldiers/login/${email}/${sha256(password).toString()}`)
       .then(res => {
-        if (!res.ok) {
-          setLoginError(true);
-        } else {
-          console.log("login success")
-        }
+        res.json().then(json => {
+          if (json.status === "Failure") {
+            setLoginError(true);
+          } else {
+            console.log("login success");
+          }
+        })
       });
   }
 

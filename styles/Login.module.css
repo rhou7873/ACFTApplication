@@ -5,9 +5,9 @@
 }
 
 .header {
-    margin-bottom: 15px; 
+    margin-bottom: 15px !important; 
 }
 
 .inputField {
-    margin-bottom: 30px;
+    margin-bottom: 30px !important;
 }
