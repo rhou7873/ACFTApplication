@@ -1,11 +1,11 @@
 .loginContainer {
 	display: flex;
 	flex-direction: column;
-	padding: 0 25%;
+	padding: 0 10%;
 }
 
 .header {
-    margin-bottom: 15px !important;
+    margin-bottom: 40px !important;
 }
 
 .inputField {
