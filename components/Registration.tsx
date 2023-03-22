@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
-import styles from "styles/NewSoldierForm.module.css";
+import styles from "styles/Registration.module.css";
 import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
 import sha256 from "crypto-js/sha256";
 import { useRouter } from "next/router";
 
-interface SoldierEntry {
+export enum RegistrationType {
+  Admin = "Admin", 
+  Grader = "Grader", 
+  Soldier = "Soldier"
+}
+
+interface User {
   _id: string,
   firstName: string,
   lastName: string,
@@ -18,7 +24,11 @@ interface SoldierEntry {
   passwordHash: string
 }
 
-function SoldierForm() : JSX.Element{
+interface RegistrationProps {
+  type: RegistrationType
+}
+
+function Registration({ type }: RegistrationProps) : JSX.Element{
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,30 +51,30 @@ function SoldierForm() : JSX.Element{
       setPwdError(true);
       return;
     }
-    let results: SoldierEntry = {
+    let results: User = {
       _id: email,
       firstName: firstName,
       lastName: lastName,
       birthday: birthday,
       gender: gender,
-      role: "Soldier",
+      role: type,
       passwordHash: sha256(password).toString()
     };
-    await fetch("./api/soldiers", {
+    await fetch(`./api/${type.toLowerCase()}s`, {
         method: "POST",
-        body: JSON.stringify(results),
+        body: JSON.stringify(results)
     }).then(res => {
       if (res.status == 409) {
         setEmailError(true);
       } else {
-        router.push("/login")
+        router.push("/")
       }
     });
   }
 
   return (
     <div className={styles.container}>
-      <Typography variant="h3">Soldier Registration</Typography>
+      <Typography variant="h3">{type} Registration</Typography>
       <form onSubmit={handleSubmit}>
         <div className={styles.formContainer}>
           <TextField 
@@ -154,4 +164,4 @@ function SoldierForm() : JSX.Element{
   );
 }
 
-export default SoldierForm;
+export default Registration;

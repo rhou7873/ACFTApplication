@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             try {
                 let body = JSON.parse(req.body);
                 await db.collection("users").insertOne(body);
-                let testResult = await db.collection("testResults").insertOne({
+                await db.collection("soldierScores").insertOne({
                     user_id: body._id,
                     mdl: -1,
                     spt: -1,
@@ -20,12 +20,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     tmr: -1,
                     totalScore: -1
                 });
-                res.status(200).json({ message: "success" });
+                res.status(200).json({ success: "true" });
             } catch (ex: unknown) {
                 if (ex instanceof MongoServerError) {
                     switch (ex.code) {
                         case 11000:
-                            res.status(409).json({ error: "Email already exists" });
+                            res.status(409).json({ success: "false", error: "Email already exists" });
                             break;
                     }
                 }
@@ -33,12 +33,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             break;
         case "GET":
             const soldiers = await db.collection("users")
-                                        .find({})
+                                        .find({ role: "Soldier" })
                                         .sort({ $natural: -1 })
                                         .toArray();
             const resResult: any[] = []
             for (let soldier of soldiers) {
-                await db.collection("testResults")
+                await db.collection("soldierScores")
                     .findOne({ user_id: soldier._id }, {
                         projection: {
                             _id: 0,

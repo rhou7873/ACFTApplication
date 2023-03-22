@@ -9,12 +9,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const hash = req.query.password;
     switch (req.method) {
         case "GET":
-            const users = await db.collection("users")
+            const user = await db.collection("users")
                                         //@ts-ignore
                                         .findOne({ _id: email, passwordHash: hash });
-            let status = "Success";
-            if (!users) status = "Failure"
-            res.status(200).json({ status: status });
+            let success = "true";
+            if (!user) success = "false"
+            res.status(200).json({ success: success, user: user });
             break;
         default:
             res.status(405).json({ error: "Invalid HTTP method " });

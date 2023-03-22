@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                                 passwordHash: 0
                                             }
                                         });
-            const results = await db.collection("testResults")
+            const results = await db.collection("soldierScores")
                                         .findOne({ user_id: soldierId }, {
                                             projection: {
                                                 _id: 0,

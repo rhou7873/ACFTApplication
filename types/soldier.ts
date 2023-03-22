@@ -1,14 +1,9 @@
-import { ObjectId } from "mongodb";
+import User from "./User"
 
 /*
  * Encapsulates data about a soldier
  */
-export default interface Soldier {
-    _id: string
-    firstName: string,
-    lastName: string,
-    birthday: string,
-    gender: string,
+export default interface Soldier extends User {
     mdl: number,
     spt: number,
     hrp: number,    

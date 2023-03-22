@@ -9,7 +9,7 @@ enum NumType {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const client = await clientPromise;
     const db = client.db("appData");
-    const collection = db.collection("testResults");
+    const collection = db.collection("soldierScores");
     const soldierId = req.query.soldierId as string;
     const newValue = req.query.newValue as string;
     const field = req.query.field as string;

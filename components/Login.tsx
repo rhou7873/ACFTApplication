@@ -2,21 +2,36 @@ import { Button, TextField, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react";
 import styles from "styles/Login.module.css";
 import sha256 from "crypto-js/sha256";
+import { useRouter } from "next/router";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
 
+    let router = useRouter();
+
   let handleLogin = (e: any) => {
     e.preventDefault();
     fetch(`/api/soldiers/login/${email}/${sha256(password).toString()}`)
       .then(res => {
         res.json().then(json => {
-          if (json.status === "Failure") {
+          if (json.success === "false") {
             setLoginError(true);
           } else {
-            console.log("login success");
+            switch (json.user.role) {
+                case "Soldier":
+                    router.push("/soldier");
+                    break;
+                case "Grader":
+                    router.push("/grader");
+                    break;
+                case "Admin":
+                    router.push("/admin");
+                    break;
+                default:
+                    console.log("what da heck happened");
+            }
           }
         })
       });

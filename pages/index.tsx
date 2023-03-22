@@ -1,23 +1,14 @@
 import { Button } from "@mui/material";
 import NavBar from "components/NavBar";
 import { useRouter } from "next/navigation";
-import NewSoldierForm from "components/NewSoldierForm";
+import Registration, { RegistrationType } from "components/Registration";
 import { useEffect } from "react";
+import Login from "components/Login";
 
 export default function Home() {
-  const router = useRouter()
-
   return (
-    <div className="startTestContainer">
-      <Button 
-        className="startTestBtn"
-        onClick={() => router.push("/grader/mdl")}
-        variant="contained"
-        size="large"
-        color="secondary"
-        fullWidth>
-        Start Test
-      </Button>
-    </div>
+    <>
+      <Login />
+    </>
   )
 }

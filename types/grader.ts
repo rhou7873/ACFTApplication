@@ -1,8 +1,6 @@
-import { ObjectId } from "mongodb"
+import User from "./User";
 
 /* Encapsulates data for an ACFT grader */
-export default interface Grader {
-    _id: ObjectId,
-    firstName: string,
-    lastName: string
+export default interface Grader extends User {
+    
 }
