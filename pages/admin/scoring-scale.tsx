@@ -19,7 +19,7 @@ export default function ScoringScale() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("./api/scoring-scale", { method: "GET" })
+        fetch("../api/scoring-scale", { method: "GET" })
             .then(res => res.json())
             .then(json => {
                 setTests(json);

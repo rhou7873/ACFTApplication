@@ -52,7 +52,7 @@ function Registration({ type }: RegistrationProps) : JSX.Element{
       return;
     }
     let results: User = {
-      _id: email,
+      _id: email.toLowerCase(),
       firstName: firstName,
       lastName: lastName,
       birthday: birthday,

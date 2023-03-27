@@ -1,19 +1,20 @@
 import { Button, TextField, Typography } from "@mui/material"
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "styles/Login.module.css";
 import sha256 from "crypto-js/sha256";
 import { useRouter } from "next/router";
+import { setCookie } from "cookies-next";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
 
-    let router = useRouter();
+  let router = useRouter();
 
   let handleLogin = (e: any) => {
     e.preventDefault();
-    fetch(`/api/soldiers/login/${email}/${sha256(password).toString()}`)
+    fetch(`/api/users/login/${email}/${sha256(password).toString()}`)
       .then(res => {
         res.json().then(json => {
           if (json.success === "false") {

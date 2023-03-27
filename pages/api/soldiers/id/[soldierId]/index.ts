@@ -24,8 +24,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                                 user_id: 0
                                             }
                                         });
-            console.log(data);
-            console.log(results);
             if (!data || !results)  {
                 res.status(404).json({ error: `Error getting soldier with _id ${soldierId}` })
             } else {

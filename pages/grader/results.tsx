@@ -35,7 +35,6 @@ export default function Results() {
         <div style={{ marginTop: 20 }}>
             {soldierData.map((soldier: Soldier) => {
                 soldier.totalScore = mdl(soldier, soldier.mdl) + spt(soldier, soldier.spt) + hrp(soldier, soldier.hrp) + sdc(soldier, soldier.sdc) + sdc(soldier, soldier.plk) + sdc(soldier, soldier.tmr);
-                console.log(soldier.totalScore);
                 fetch(`/api/soldiers/id/${soldier._id}/totalScore/${soldier.totalScore}`, { method: "PATCH" });
                 return (
                     <Card key={soldier._id.toString()} sx={cardStyle}>
