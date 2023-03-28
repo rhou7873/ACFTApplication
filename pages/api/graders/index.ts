@@ -9,7 +9,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case "POST":
             try {
                 let body = JSON.parse(req.body);
-                await db.collection("users").insertOne(body);
+                await db.collection("users").insertOne({
+                    ...body,
+                    active_acft: false,
+                    acft_id: "N/A"
+                });
                 res.status(200).json({ success: "true" });
             } catch (ex: unknown) {
                 if (ex instanceof MongoServerError) {

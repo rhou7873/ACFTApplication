@@ -6,6 +6,7 @@ import Soldier from "types/soldier";
 import Grader from "types/grader";
 import NavArrows from "./NavArrows";
 import SoldierDropdown from "./SoldierDropdown";
+import { getCookie } from "cookies-next";
 
 interface NumEntryProps {
   // test: ActiveTest,
@@ -29,7 +30,22 @@ function NumEntryTest(props: NumEntryProps) {
   const [textInputError, setTextInputError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [currSoldier, setCurrSoldier] = useState<Soldier>();
+  const [activeACFT, setActiveACFT] = useState(false);
+  const [acftId, setACFTId] = useState("N/A");
   
+  useEffect(() => {
+    let email = getCookie("email");
+    fetch(`/api/users/${email}`)
+      .then(res => {
+        res.json().then(json => {
+          setActiveACFT(json.user.active_acft);
+          if (json.user.active_acft) {
+            setACFTId(json.user.acft_id);
+          }
+        })
+      })
+  }, [])
+
   let handleSubmit = (e: React.MouseEvent) => {
     if (currSoldier == undefined) {
       setDropdownError(true);
@@ -39,7 +55,7 @@ function NumEntryTest(props: NumEntryProps) {
       return;
     }
     setTextInputError(false);
-    fetch(`../api/soldiers/id/${currSoldier._id}/${props.testName}/${formVal}`,
+    fetch(`/api/acfts/testResults/${acftId}`,
           { method: "PATCH" })
       .then(res => {
         res.json()

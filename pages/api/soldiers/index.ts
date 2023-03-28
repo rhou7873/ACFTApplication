@@ -9,11 +9,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         case "POST":
             try {
                 let body = JSON.parse(req.body);
-                await db.collection("users").insertOne(body);
+                await db.collection("users").insertOne({ 
+                    ...body,
+                    active_acft: false,
+                    acft_id: "N/A"
+                });
                 await db.collection("soldierScores").insertOne({
                     user_id: body._id,
-                    active_acft: false,
-                    acft_id: "N/A",
                     mdl: -1,
                     spt: -1,
                     hrp: -1,

@@ -25,12 +25,12 @@ function ActiveTest() {
 
   useEffect(() => {
     setEmail(getCookie("email") as string);
-    fetch(`../api/soldiers/id/${email}`)
+    fetch(`/api/users/${email}`)
       .then(res => {
         res.json().then(json => {
-          setIsTakingTest(json.active_acft);
-          if (json.active_acft) {
-            setTestId(json.acft_id);
+          setIsTakingTest(json.user.active_acft);
+          if (json.user.active_acft) {
+            setTestId(json.user.acft_id);
           }
           setLoading(false);
         })
@@ -38,8 +38,7 @@ function ActiveTest() {
   }, [])
   
   useEffect(() => {
-
-    fetch(`../api/acfts/testResults/${testId}`)
+    fetch(`/api/acfts/testResults/${testId}`)
       .then(res => {
         res.json().then(json => {
           json.forEach((e: LiveResult) => {

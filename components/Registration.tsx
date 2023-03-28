@@ -60,7 +60,7 @@ function Registration({ type }: RegistrationProps) : JSX.Element{
       role: type,
       passwordHash: sha256(password).toString()
     };
-    await fetch(`../api/${type.toLowerCase()}s`, {
+    await fetch(`/api/${type.toLowerCase()}s`, {
         method: "POST",
         body: JSON.stringify(results)
     }).then(res => {

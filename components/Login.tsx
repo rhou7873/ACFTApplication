@@ -17,7 +17,7 @@ function Login() {
   let handleLogin = (e: any) => {
     e.preventDefault();
     setLoginLoading(true);
-    fetch(`/api/users/login/${email}/${sha256(password).toString()}`)
+    fetch(`/api/users/${email}/${sha256(password).toString()}`)
       .then(res => {
         res.json().then(json => {
           if (json.success === "false") {
