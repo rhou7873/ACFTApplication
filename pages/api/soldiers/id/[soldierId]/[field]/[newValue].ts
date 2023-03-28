@@ -1,5 +1,4 @@
 import clientPromise from 'lib/mongodb';
-import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 enum NumType {

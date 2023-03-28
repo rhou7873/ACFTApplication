@@ -1,5 +1,4 @@
 import clientPromise from 'lib/mongodb';
-import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -33,6 +32,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                    lastName: data.lastName,
                    birthday: data.birthday,
                    gender: data.gender,
+                   active_acft: results.active_acft,
+                   acft_id: results.acft_id,
                    mdl: results.mdl,
                    spt: results.spt,
                    hrp: results.hrp,

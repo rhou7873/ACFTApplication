@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Button, MenuItem, TextField, Typography } from "@mui/material";
-import styles from "styles/Registration.module.css";
+import styles from "styles/Form.module.css";
 import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
@@ -60,7 +60,7 @@ function Registration({ type }: RegistrationProps) : JSX.Element{
       role: type,
       passwordHash: sha256(password).toString()
     };
-    await fetch(`./api/${type.toLowerCase()}s`, {
+    await fetch(`../api/${type.toLowerCase()}s`, {
         method: "POST",
         body: JSON.stringify(results)
     }).then(res => {

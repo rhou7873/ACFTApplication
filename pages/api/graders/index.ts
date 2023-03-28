@@ -1,5 +1,5 @@
 import clientPromise from 'lib/mongodb';
-import { MongoServerError, ObjectId } from "mongodb";
+import { MongoServerError } from "mongodb";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -26,33 +26,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                         .find({ role: "Grader" })
                                         .sort({ $natural: -1 })
                                         .toArray();
-            // const resResult: any[] = []
-            // for (let soldier of soldiers) {
-            //     await db.collection("soldierScores")
-            //         .findOne({ user_id: soldier._id }, {
-            //             projection: {
-            //                 _id: 0,
-            //                 user_id: 0
-            //             }
-            //         })
-            //         .then(result => {
-            //             let obj = {
-            //                 _id: soldier._id,
-            //                 firstName: soldier.firstName,
-            //                 lastName: soldier.lastName,
-            //                 birthday: soldier.birthday,
-            //                 gender: soldier.gender,
-            //                 mdl: result?.mdl,
-            //                 spt: result?.spt,
-            //                 hrp: result?.hrp,
-            //                 sdc: result?.sdc,
-            //                 plk: result?.plk,
-            //                 tmr: result?.tmr,
-            //                 totalScore: result?.totalScore
-            //             }
-            //             resResult.push(obj)
-            //         });
-            // }
             res.status(200).json(graders);
             break;
         default:

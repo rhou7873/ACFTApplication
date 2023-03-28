@@ -1,11 +1,10 @@
 import clientPromise from 'lib/mongodb';
-import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const client = await clientPromise;
     const db = client.db("appData");
-    const collection = db.collection("soldierData");
+    const collection = db.collection("soldierScores");
     const soldierId = req.query.soldierId as string; 
     const field = req.query.field as string;
 
@@ -14,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const fieldValue = await collection
                                 .findOne({ 
                                     // @ts-ignore
-                                    _id: soldierId
+                                    user_id: soldierId
                                 }, {
                                     projection: {
                                         "_id": 0,

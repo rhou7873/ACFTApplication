@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 const allowedPath = new Map<string, string[]>(Object.entries({
     "admin": ["/admin", "/register/grader"],
-    "grader": ["/grader", "register/soldier"],
+    "grader": ["/grader", "/register/soldier"],
     "soldier": ["/soldier"]
 }));
 

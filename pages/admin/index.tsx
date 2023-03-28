@@ -27,8 +27,9 @@ function AdminHome() {
       <NavBar
         elements={[
           { title: "Home", route: "admin" },
+          { title: "Register Grader", route: "register/grader"},
+          { title: "Schedule ACFT", route: "admin/schedule-acft"},
           { title: "Scoring Scale", route: "admin/scoring-scale" },
-          { title: "Register Grader", route: "register/grader"}
         ]}
       />
       <div style={{ marginTop: 30 }}>

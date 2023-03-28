@@ -1,15 +1,15 @@
 import clientPromise from 'lib/mongodb';
-import { MongoServerError, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const client = await clientPromise;
-    const db = client.db("appData");
+    const db = client.db("acftData");
     switch (req.method) {
         case "POST":
             let body = JSON.parse(req.body);
             let acftId: ObjectId;
-            await db.collection("acfts").insertOne(body)
+            await db.collection("acftLog").insertOne({ ...body, active: false })
                 .then(res => {
                     acftId = res.insertedId;
                     let soldiers: string[] = body.soldiers;

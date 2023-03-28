@@ -1,5 +1,5 @@
 import clientPromise from 'lib/mongodb';
-import { MongoServerError, ObjectId } from "mongodb";
+import { MongoServerError } from "mongodb";
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -12,6 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 await db.collection("users").insertOne(body);
                 await db.collection("soldierScores").insertOne({
                     user_id: body._id,
+                    active_acft: false,
+                    acft_id: "N/A",
                     mdl: -1,
                     spt: -1,
                     hrp: -1,
