@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             let result: any[] = [];
             try {
                 await collection.findOne({ acft_id: new ObjectId(acft_id) }, 
-                                                   { projection: { _id: 0, results: 1 }})
+                                         { projection: { _id: 0, results: 1 }})
                                 .then(queryResult => {
                                         for (let e of queryResult?.results) {
                                             result.push(e);

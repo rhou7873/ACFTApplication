@@ -1,9 +1,13 @@
 import React from "react"
 import Registration, { RegistrationType } from "components/Registration"
+import HomeButton from "components/HomeButton"
 
 function Register() {
   return (
-    <Registration type={RegistrationType.Soldier} />
+    <>
+      <HomeButton />
+      <Registration type={RegistrationType.Soldier} />
+    </>
   )
 }
 

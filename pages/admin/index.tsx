@@ -2,6 +2,7 @@ import { Typography } from "@mui/material"
 import NavBar from "components/NavBar";
 import React, { useContext, useEffect, useState } from "react";
 import { getCookie } from "cookies-next";
+import Logout from "components/Logout";
 
 function AdminHome() {
   const [session, setSession] = useState({
@@ -24,6 +25,7 @@ function AdminHome() {
 
   return (
     <>
+      <Logout />
       <NavBar
         elements={[
           { title: "Home", route: "admin" },

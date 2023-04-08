@@ -1,4 +1,4 @@
-import { Card, CardContent, CircularProgress, Table, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Card, CardContent, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { getCookie } from "cookies-next";
 import { hrp, mdl, plk, sdc, spt, tmr } from "lib/scoreUtilities";
 import React, { useEffect, useState } from "react";
@@ -25,7 +25,11 @@ function ActiveTest() {
 
   useEffect(() => {
     setEmail(getCookie("email") as string);
-    fetch(`/api/users/${email}`)
+  }, [])
+
+  useEffect(() => {
+    if (email.length > 0) {
+      fetch(`/api/users/${email}`)
       .then(res => {
         res.json().then(json => {
           setIsTakingTest(json.user.active_acft);
@@ -35,7 +39,8 @@ function ActiveTest() {
           setLoading(false);
         })
       })
-  }, [])
+    }
+  }, [email])
   
   useEffect(() => {
     fetch(`/api/acfts/testResults/${testId}`)
@@ -82,36 +87,38 @@ function ActiveTest() {
                   <TableCell><Typography variant="h6">Score</Typography></TableCell>
                 </TableRow>
               </TableHead>
-              <TableRow>
-                <TableCell>Max Deadlift</TableCell>
-                <TableCell>{soldier.mdl == -1 ? 0 : soldier.mdl}</TableCell>
-                <TableCell>{mdl(soldier, soldier.mdl)}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Standing Power Throw</TableCell>
-                <TableCell>{soldier.spt == -1 ? 0 : soldier.spt}</TableCell>
-                <TableCell>{spt(soldier, soldier.spt)}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Hand Release Push-Ups</TableCell>
-                <TableCell>{soldier.hrp == -1 ? 0 : soldier.hrp}</TableCell>
-                <TableCell>{hrp(soldier, soldier.hrp)}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Sprint, Drag, Carry</TableCell>
-                <TableCell>{soldier.sdc == -1 ? 0 : soldier.sdc}</TableCell>
-                <TableCell>{sdc(soldier, soldier.sdc)}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Plank</TableCell>
-                <TableCell>{soldier.plk == -1 ? 0 : soldier.plk}</TableCell>
-                <TableCell>{plk(soldier, soldier.plk)}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Two-Mile Run</TableCell>
-                <TableCell>{soldier.tmr == -1 ? 0 : soldier.tmr}</TableCell>
-                <TableCell>{tmr(soldier, soldier.tmr)}</TableCell>
-              </TableRow>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Max Deadlift</TableCell>
+                  <TableCell>{soldier.mdl == -1 ? 0 : soldier.mdl}</TableCell>
+                  <TableCell>{mdl(soldier, soldier.mdl)}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Standing Power Throw</TableCell>
+                  <TableCell>{soldier.spt == -1 ? 0 : soldier.spt}</TableCell>
+                  <TableCell>{spt(soldier, soldier.spt)}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Hand Release Push-Ups</TableCell>
+                  <TableCell>{soldier.hrp == -1 ? 0 : soldier.hrp}</TableCell>
+                  <TableCell>{hrp(soldier, soldier.hrp)}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Sprint, Drag, Carry</TableCell>
+                  <TableCell>{soldier.sdc == -1 ? 0 : soldier.sdc}</TableCell>
+                  <TableCell>{sdc(soldier, soldier.sdc)}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Plank</TableCell>
+                  <TableCell>{soldier.plk == -1 ? 0 : soldier.plk}</TableCell>
+                  <TableCell>{plk(soldier, soldier.plk)}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Two-Mile Run</TableCell>
+                  <TableCell>{soldier.tmr == -1 ? 0 : soldier.tmr}</TableCell>
+                  <TableCell>{tmr(soldier, soldier.tmr)}</TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
             <Typography variant="h6">Total: {soldier.totalScore == -1 ? 0 : soldier.totalScore}</Typography>
           </CardContent>

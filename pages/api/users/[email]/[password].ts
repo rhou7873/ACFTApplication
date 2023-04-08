@@ -1,4 +1,4 @@
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import clientPromise from 'lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -13,7 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                         //@ts-ignore
                                         .findOne({ _id: email, passwordHash: hash });
             let success = "true";
-            if (user) {
+            let roleSelected = getCookie("role", { req, res })?.toString().toLowerCase();
+            if (user && user.role.toLowerCase() === roleSelected) {
                 setCookie("email", user._id, { req, res });
                 setCookie("firstName", user.firstName, { req, res });
                 setCookie("lastName", user.lastName, { req, res });

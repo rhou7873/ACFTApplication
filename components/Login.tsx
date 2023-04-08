@@ -4,13 +4,14 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "styles/Login.module.css";
 import sha256 from "crypto-js/sha256";
 import { useRouter } from "next/router";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
+  const [role, setRole] = useState("User");
 
   let router = useRouter();
 
@@ -42,46 +43,50 @@ function Login() {
       });
   }
 
+  useEffect(() => {
+    setRole(getCookie("role") as string);
+  }, []);
+
   return (
-    <div>
-        <Typography className={styles.header} variant="h4">Login</Typography>
-        <form className={styles.loginContainer} onSubmit={handleLogin}>
+    <div className={styles.loginContainer}>
+      <Typography className={styles.header} variant="h3">{role} Login</Typography>
+      <form className={styles.formContainer} onSubmit={handleLogin}>
+        <TextField 
+            className={styles.inputField}
+            error={loginError}
+            value={email} 
+            onChange={e => {setLoginError(false); setEmail(e.target.value)}} 
+            name="email"
+            label="Email"
+            type="email"
+            required />
           <TextField 
-              className={styles.inputField}
-              error={loginError}
-              value={email} 
-              onChange={e => {setLoginError(false); setEmail(e.target.value)}} 
-              name="email"
-              label="Email"
-              type="email"
-              required />
-            <TextField 
-              className={styles.inputField}
-              error={loginError}
-              value={password} 
-              onChange={e => {setLoginError(false); setPassword(e.target.value)}} 
-              name="password"
-              label="Password"
-              type="password"
-              helperText={loginError ? "Email or password invalid" : ""}
-              required />    
-            {loginLoading &&
-              <LoadingButton
-                size="large"
-                variant="contained"
-                type="submit"
-                loading={loginLoading}
-                sx={{ height: 60 }} />        
-            }
-            {!loginLoading &&
-              <Button
-                size="large"
-                variant="contained"
-                type="submit"
-                sx={{ height: 60 }}>
-                  Login
-              </Button>
-            }
+            className={styles.inputField}
+            error={loginError}
+            value={password} 
+            onChange={e => {setLoginError(false); setPassword(e.target.value)}} 
+            name="password"
+            label="Password"
+            type="password"
+            helperText={loginError ? "Email or password invalid" : ""}
+            required />    
+          {loginLoading &&
+            <LoadingButton
+              size="large"
+              variant="contained"
+              type="submit"
+              loading={loginLoading}
+              sx={{ height: 60 }} />        
+          }
+          {!loginLoading &&
+            <Button
+              size="large"
+              variant="contained"
+              type="submit"
+              sx={{ height: 60 }}>
+                Login
+            </Button>
+          }
       </form>
     </div>
   )

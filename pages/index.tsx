@@ -1,15 +1,51 @@
-import { Button } from "@mui/material";
-import NavBar from "components/NavBar";
-import { useRouter } from "next/navigation";
-import Registration, { RegistrationType } from "components/Registration";
-import { useEffect } from "react";
-import Login from "components/Login";
-import NewACFT from "components/NewACFT";
+import { Button, Typography } from "@mui/material";
+import { hasCookie, setCookie } from "cookies-next";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import styles from "styles/RoleSelect.module.css";
 
-export default function Home() {
+export default function Index() {
+  let router = useRouter();
+
+  let handleRoleButton = (role: string) => {
+    setCookie("role", role);
+    router.push("/login");
+    console.log(role);
+  }
+
   return (
     <>
-      <Login />
+      <div className={styles.roleButtons}>
+        <Typography 
+          variant="h3"
+          sx={{ marginBottom: 5 }}>
+            Login as
+        </Typography>
+        <Button
+          onClick={() => handleRoleButton("Soldier")}
+          size="large"
+          variant="contained"
+          type="submit"
+          sx={{ marginBottom: 7, height: 60 }}>
+            Soldier
+        </Button>
+        <Button
+          onClick={() => handleRoleButton("Grader")}
+          size="large"
+          variant="contained"
+          type="submit"
+          sx={{ marginBottom: 7, height: 60 }}>
+            Grader
+        </Button>
+        <Button
+          onClick={() => handleRoleButton("Admin")}
+          size="large"
+          variant="contained"
+          type="submit"
+          sx={{ marginBottom: 7, height: 60 }}>
+            Administrator
+        </Button>
+      </div>
     </>
   )
 }
