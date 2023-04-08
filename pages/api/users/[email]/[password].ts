@@ -15,11 +15,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             let success = "true";
             let roleSelected = getCookie("role", { req, res })?.toString().toLowerCase();
             if (user && user.role.toLowerCase() === roleSelected) {
+                setCookie("loggedIn", true, { req, res });
                 setCookie("email", user._id, { req, res });
                 setCookie("firstName", user.firstName, { req, res });
                 setCookie("lastName", user.lastName, { req, res });
                 setCookie("role", user.role, { req, res });
-                setCookie("loggedIn", true, { req, res });
             } else {
                 success = "false";
             }
