@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { deleteCookie, removeCookies } from "cookies-next";
+import { deleteCookie, removeCookies, setCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import React from "react";
 

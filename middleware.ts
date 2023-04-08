@@ -9,12 +9,14 @@ const allowedPath = new Map<string, string[]>(Object.entries({
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-    const loggedIn = request.cookies.get("loggedIn");
+    const loggedIn = request.cookies.get("loggedIn") !== undefined;
     const role = request.cookies.get("role")?.value.toLowerCase() as string;
     const goingToLogin = request.nextUrl.pathname === "/";
     
     if (!goingToLogin && !loggedIn) {
         // Trying to go somewhere other than login screen when not logged in
+        console.log("here");
+        console.log("loggedIn cookie value: " + request.cookies.get("loggedIn")?.toString());
         return NextResponse.redirect(new URL("/", request.url))
     } else if (goingToLogin && loggedIn) {
         // Trying to go to login screen when already logged in
