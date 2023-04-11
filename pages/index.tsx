@@ -1,4 +1,5 @@
 import { Button, Typography } from "@mui/material";
+import Login from "components/Login";
 import { hasCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -15,7 +16,7 @@ export default function Index() {
 
   return (
     <>
-      <div className={styles.roleButtons}>
+      {/* <div className={styles.roleButtons}>
         <Typography 
           variant="h3"
           sx={{ marginBottom: 5 }}>
@@ -44,8 +45,9 @@ export default function Index() {
           type="submit"
           sx={{ marginBottom: 7, height: 60 }}>
             Administrator
-        </Button>
-      </div>
+        </Button> */}
+      {/* </div> */}
+      <Login />
     </>
   )
 }

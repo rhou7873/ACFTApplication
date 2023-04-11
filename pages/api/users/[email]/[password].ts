@@ -13,8 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                                         //@ts-ignore
                                         .findOne({ _id: email, passwordHash: hash });
             let success = "true";
-            let roleSelected = getCookie("role", { req, res })?.toString().toLowerCase();
-            if (user && user.role.toLowerCase() === roleSelected) {
+            // let roleSelected = getCookie("role", { req, res })?.toString().toLowerCase();
+            if (user) {
                 console.log("about to set cookies");
                 setCookie("loggedIn", true, { req, res });
                 setCookie("email", user._id, { req, res });

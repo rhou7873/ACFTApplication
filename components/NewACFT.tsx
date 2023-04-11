@@ -45,7 +45,7 @@ function NewACFT() {
           method: "POST",
           body: JSON.stringify(results)
       }).then(res => {
-          router.push("/")
+          router.push("/admin")
       });
     }
   

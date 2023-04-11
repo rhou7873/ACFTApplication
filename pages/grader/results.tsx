@@ -102,7 +102,7 @@ export default function Results() {
             <Button 
                 variant="contained" 
                 size="large" 
-                onClick={() => router.push("/")}
+                onClick={() => router.push("/admin")}
                 fullWidth>
                     Confirm Results
             </Button>

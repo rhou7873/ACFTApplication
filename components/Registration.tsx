@@ -67,7 +67,7 @@ function Registration({ type }: RegistrationProps) : JSX.Element{
       if (res.status == 409) {
         setEmailError(true);
       } else {
-        router.push("/")
+        router.push("/admin")
       }
     });
   }

@@ -49,7 +49,7 @@ function Login() {
 
   return (
     <div className={styles.loginContainer}>
-      <Typography className={styles.header} variant="h3">{role} Login</Typography>
+      <Typography className={styles.header} variant="h3">Login</Typography>
       <form className={styles.formContainer} onSubmit={handleLogin}>
         <TextField 
             className={styles.inputField}

@@ -10,7 +10,7 @@ function MaxDeadlift() {
           title="MAX DEADLIFT" 
           testName="mdl"
           unit="LBS"
-          prevPageUrl="/"
+          prevPageUrl="/admin"
           nextPageUrl="/grader/spt"
       />
     </>

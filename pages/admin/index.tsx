@@ -26,16 +26,31 @@ function AdminHome() {
   return (
     <>
       <Logout />
-      <NavBar
-        elements={[
-          { title: "Home", route: "admin" },
-          { title: "Register Grader", route: "register/grader"},
-          { title: "Schedule ACFT", route: "admin/schedule-acft"},
-          { title: "Scoring Scale", route: "admin/scoring-scale" },
-        ]}
-      />
-      <div style={{ marginTop: 30 }}>
-        <Typography variant="h2"><i>Hello, <b>{session.firstName}</b></i></Typography>
+        <div className="container">
+          <div style={{ marginTop: 30 }}>
+            <Typography variant="h2">Features Demo</Typography>
+          </div>
+          <Typography sx={{ marginTop: 3 }}>Admin Features</Typography>
+          <NavBar
+            elements={[
+              { title: "Register Grader", route: "register/grader"},
+              { title: "Schedule ACFT", route: "admin/schedule-acft"},
+              { title: "Scoring Scale", route: "admin/scoring-scale" },
+            ]}
+          />
+          <Typography sx={{ marginTop: 3 }}>Grader Features</Typography>
+          <NavBar
+            elements={[
+              { title: "Register Soldier", route: "register/soldier" },
+              { title: "Start Test", route: "grader/mdl"},
+            ]}
+          />
+          <Typography sx={{ marginTop: 3 }}>Soldier Features</Typography>
+          <NavBar
+            elements={[
+              { title: "View Scorecard", route: "soldier/active-test"},
+            ]}
+          />
       </div>
     </>
   )

@@ -26,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 });
                 res.status(200).json({ success: "true" });
             } catch (ex: unknown) {
+                console.log(ex)
                 if (ex instanceof MongoServerError) {
                     switch (ex.code) {
                         case 11000:

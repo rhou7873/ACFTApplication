@@ -18,12 +18,11 @@ function NavBar(props: NavBarProps) {
   const router = useRouter();
 
   return (
-    <ButtonGroup 
-      size="large"
-      fullWidth>
+    <div className="navbar">
       {props.elements?.map(e => {
         return (
           <Button 
+            sx={{ marginBottom: 5 }}
             key={e.title}
             variant={selected === e.title ? "contained" : "outlined"}
             onClick={() => { setSelected(e.title); router.push(e.route) }}>
@@ -31,7 +30,7 @@ function NavBar(props: NavBarProps) {
           </Button>
         )
       })}
-    </ButtonGroup>
+    </div>
   );
 }
 

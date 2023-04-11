@@ -29,7 +29,7 @@ function ActiveTest() {
 
   useEffect(() => {
     if (email.length > 0) {
-      fetch(`/api/users/${email}`)
+      fetch(`/api/users/dylan.mcguire00@utexas.edu`)
       .then(res => {
         res.json().then(json => {
           setIsTakingTest(json.user.active_acft);
